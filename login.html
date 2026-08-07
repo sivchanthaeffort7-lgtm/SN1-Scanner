@@ -412,8 +412,38 @@ toggle.classList.add("fa-eye");
 
 }
 
+async function login(){
+
+const username=document.getElementById("user").value;
+const password=document.getElementById("pass").value;
+
+const form=new FormData();
+
+form.append("action","login");
+form.append("username",username);
+form.append("password",password);
+
+const res=await fetch("https://script.google.com/macros/s/AKfycbzDMYa0DttaLXrVscufwKhMNoJyNqORRL58EQzMmT0MB-UKQYR2IeRKA-qhnkaGG5Wt/exec",{
+
+method:"POST",
+
+body:form
+
+});
+
+const data=await res.json();
+
+document.getElementById("msg").innerHTML=data.message;
+
+if(data.success){
+
+localStorage.setItem("SN1User",data.user);
+
+window.location.href="index.html";
+
 }
 
+}
 </script>
   
 <script src="js/login.js"></script>
