@@ -210,9 +210,9 @@ color:gray;
 
 position:relative;
 
-margin-top:20px;
+height:360px;
 
-height:340px;
+background:linear-gradient(90deg,#06255e,#0a49b5);
 
 border-radius:28px;
 
@@ -222,33 +222,11 @@ display:flex;
 
 align-items:center;
 
+justify-content:space-between;
+
 padding:55px;
 
-background:
-
-linear-gradient(
-
-90deg,
-
-rgba(6,43,102,.92)0%,
-
-rgba(10,63,148,.72)45%,
-
-rgba(10,63,148,.20)100%
-
-),
-
-url("../images/Juki.png");
-
-background-size:cover;
-
-background-position:center;
-
-background-repeat:no-repeat;
-
-color:white;
-
-box-shadow:0 20px 45px rgba(0,0,0,.22);
+box-shadow:0 20px 45px rgba(0,0,0,.25);
 
 }
 
@@ -258,17 +236,19 @@ position:absolute;
 
 inset:0;
 
-background:
-
-linear-gradient(
+background:linear-gradient(
 
 90deg,
 
-rgba(0,0,0,.18),
+rgba(3,25,70,.82),
 
-rgba(0,0,0,.02)
+rgba(3,25,70,.45),
+
+rgba(3,25,70,0)
 
 );
+
+z-index:1;
 
 }
 
@@ -276,76 +256,27 @@ rgba(0,0,0,.02)
 
 position:relative;
 
-z-index:5;
+z-index:3;
 
-width:48%;
-
-}
-
-.banner h2{
-
-font-family:'Bokor',serif;
-
-font-size:36px;
-
-margin-bottom:0;
-
-text-shadow:0 6px 15px rgba(0,0,0,.45);
+width:45%;
 
 }
 
-.banner h1{
+.banner-img{
 
-font-family:'Bokor',serif;
+position:absolute;
 
-font-size:82px;
+right:-20px;
 
-line-height:78px;
+bottom:0;
 
-margin-bottom:18px;
+height:100%;
 
-text-shadow:0 8px 18px rgba(0,0,0,.45);
+z-index:2;
 
-}
+filter:drop-shadow(0 18px 25px rgba(0,0,0,.35));
 
-.banner p{
-
-font-size:18px;
-
-line-height:31px;
-
-color:#eef5ff;
-
-margin-bottom:30px;
-
-max-width:520px;
-
-text-shadow:0 3px 10px rgba(0,0,0,.35);
-
-}
-
-.banner input{
-
-width:390px;
-
-height:55px;
-
-padding:0 25px;
-
-border:none;
-
-outline:none;
-
-border-radius:50px;
-
-font-size:16px;
-
-background:rgba(255,255,255,.95);
-
-box-shadow:0 10px 25px rgba(0,0,0,.20);
-
-}
-}.banner{
+}}.banner{
     position: relative;
     width: 100%;
     height: 320px;
