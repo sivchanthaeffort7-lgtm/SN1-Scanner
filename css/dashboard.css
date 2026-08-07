@@ -17,14 +17,23 @@ overflow:hidden;
 .sidebar{
 
 width:260px;
-background:linear-gradient(180deg,#0b57d0,#003ea5);
+
+background:linear-gradient(
+180deg,
+#041F4A,
+#062C67,
+#0A3F94
+);
+
 color:white;
 
 display:flex;
+
 flex-direction:column;
 
-}
+box-shadow:8px 0 25px rgba(0,0,0,.18);
 
+}
 .logo{
 
 padding:30px;
