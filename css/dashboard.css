@@ -1,1 +1,103 @@
-d
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Kantumruy Pro',sans-serif;
+}
+
+body{
+background:#edf3fb;
+display:flex;
+height:100vh;
+overflow:hidden;
+}
+
+/* Sidebar */
+
+.sidebar{
+
+width:260px;
+background:linear-gradient(180deg,#0b57d0,#003ea5);
+color:white;
+
+display:flex;
+flex-direction:column;
+
+}
+
+.logo{
+
+padding:30px;
+text-align:center;
+
+border-bottom:1px solid rgba(255,255,255,.15);
+
+}
+
+.logo h1{
+
+font-size:40px;
+
+}
+
+.logo p{
+
+font-size:13px;
+
+opacity:.8;
+
+}
+
+.sidebar ul{
+
+list-style:none;
+
+padding:20px;
+
+}
+
+.sidebar li{
+
+padding:15px;
+
+margin-bottom:8px;
+
+border-radius:12px;
+
+cursor:pointer;
+
+transition:.3s;
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+}
+
+.sidebar li:hover{
+
+background:rgba(255,255,255,.15);
+
+}
+
+.sidebar .active{
+
+background:white;
+
+color:#0b57d0;
+
+font-weight:bold;
+
+}
+
+/* Main */
+
+.main-content{
+
+flex:1;
+
+padding:35px;
+
+}
