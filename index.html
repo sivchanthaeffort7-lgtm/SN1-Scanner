@@ -2,19 +2,79 @@
 <html lang="km">
 
 <head>
-<meta charset="UTF-8">
-<title>SN1 Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SN1 Dashboard</title>
+
+    <link rel="stylesheet" href="css/dashboard.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
 
 <body>
 
-<h1>🎉 Login Success</h1>
+<div class="sidebar">
 
-<h2>Welcome to SN1 Dashboard</h2>
+    <div class="logo">
 
-<script>
-document.write("<p>User : " + localStorage.getItem("SN1User") + "</p>");
-</script>
+        <h1>SN1</h1>
+
+        <p>Warehouse Management System</p>
+
+    </div>
+
+    <ul>
+
+        <li class="active">
+            <i class="fa-solid fa-house"></i>
+            ទំព័រដើម
+        </li>
+
+        <li>
+            <i class="fa-solid fa-camera"></i>
+            ស្កេនប្រចាំថ្ងៃ
+        </li>
+
+        <li>
+            <i class="fa-solid fa-calendar"></i>
+            សរុបប្រចាំខែ
+        </li>
+
+        <li>
+            <i class="fa-solid fa-magnifying-glass"></i>
+            ស្វែងរកម៉ាស៊ីន
+        </li>
+
+        <li>
+            <i class="fa-solid fa-chart-column"></i>
+            របាយការណ៍
+        </li>
+
+        <li>
+            <i class="fa-solid fa-users"></i>
+            អ្នកប្រើប្រាស់
+        </li>
+
+        <li>
+            <i class="fa-solid fa-gear"></i>
+            ការកំណត់
+        </li>
+
+    </ul>
+
+</div>
+
+<div class="main-content">
+
+    <h2>SN1 Dashboard</h2>
+
+</div>
+
+<script src="js/dashboard.js"></script>
 
 </body>
 </html>
