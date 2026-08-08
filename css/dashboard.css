@@ -724,7 +724,7 @@ color:gray;
 .menu-btn{
     position:absolute;
     top:20px;
-    left:295px;
+    left:290px;
 
     z-index:100;
 
@@ -819,4 +819,32 @@ color:gray;
 /* BANNER GOES BELOW HEADER */
 .banner{
     margin-top:75px;
+}
+/* LOGOUT BUTTON */
+.logout-btn{
+    margin: auto 20px 20px;
+    padding: 14px 15px;
+
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+    color:white;
+    cursor:pointer;
+
+    border-radius:12px;
+
+    transition:.3s;
+}
+
+.logout-btn i{
+    font-size:17px;
+}
+
+.logout-btn span{
+    font-size:14px;
+}
+
+.logout-btn:hover{
+    background:rgba(255,255,255,.15);
 }
