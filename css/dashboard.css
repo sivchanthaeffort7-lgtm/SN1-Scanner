@@ -241,42 +241,33 @@ color:gray;
 }
 
 
-/* JUKI IMAGE — OVERLAY */
+/* JUKI IMAGE - OVERLAY */
 
 .banner::before{
     content:"";
-
     position:absolute;
     top:0;
     right:0;
     bottom:0;
 
-    width:65%;
+    width:52%;
 
     background-image:
         linear-gradient(
             90deg,
             rgba(3,35,105,.95) 0%,
-            rgba(3,35,105,.45) 25%,
-            rgba(3,35,105,.05) 65%
+            rgba(3,35,105,.45) 35%,
+            rgba(3,35,105,.05) 100%
         ),
         url("../images/Juki.png");
 
     background-repeat:no-repeat;
-
-    background-position:
-        center,
-        right center;
-
-    background-size:
-        100% 100%,
-        auto 125%;
+    background-position:center, right center;
+    background-size:100% 100%, contain;
 
     opacity:.95;
-
     z-index:1;
 }
-
 
 /* TEXT AREA */
 
@@ -294,13 +285,13 @@ color:gray;
 /* SMALL KHMER HEADER */
 
 .banner-text h2{
-    margin:0 0 5px;
+    margin:0 0 8px;
 
     font-family:'Bokor',serif;
 
-    font-size:34px;
+    font-size:28px;
 
-    line-height:1.25;
+    line-height:1.2;
 
     color:#ffffff;
 
@@ -312,14 +303,11 @@ color:gray;
 /* MAIN SN1 */
 
 .banner-text h1{
-    margin:0 0 12px;
+    margin:0 0 10px;
 
     font-family:'Bokor',serif;
-
-    font-size:72px;
-
-    line-height:.95;
-
+    font-size:62px;
+    line-height:1;
     font-weight:400;
 
     color:#ffffff;
@@ -328,17 +316,16 @@ color:gray;
         0 6px 20px rgba(0,0,0,.45);
 }
 
-
 /* DESCRIPTION */
 
 .banner-text p{
-    margin:0 0 25px;
+    margin:0 0 20px;
 
     font-family:'Kantumruy Pro',sans-serif;
 
-    font-size:17px;
+    font-size:16px;
 
-    line-height:1.8;
+    line-height:1.7;
 
     color:#e8f1ff;
 
