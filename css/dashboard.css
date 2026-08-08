@@ -863,14 +863,14 @@ color:gray;
 .summary-cards {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
+    gap: 12px;
     width: 100%;
     margin-top: 18px;
 }
 
 .summary-card {
     background: #fff;
-    min-height: 105px;
+    min-height: 125px;
     border-radius: 14px;
 
     display: flex;
