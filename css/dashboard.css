@@ -233,40 +233,55 @@ color:gray;
     box-shadow:0 18px 40px rgba(0,0,0,.20);
 }
 
-
 /* =========================
-   JUKI IMAGE + OVERLAY
+   JUKI IMAGE
    ========================= */
 
 .banner::before{
     content:"";
 
     position:absolute;
-    inset:0;
+    top:0;
+    right:0;
+    bottom:0;
 
-    background-image:
-        linear-gradient(
-            90deg,
-            rgba(3,35,105,.92) 0%,
-            rgba(3,35,105,.72) 28%,
-            rgba(3,35,105,.25) 52%,
-            rgba(3,35,105,.05) 75%
-        ),
-        url("../images/Juki.png");
+    width:62%;
+
+    background-image:url("../images/Juki.png");
 
     background-repeat:no-repeat;
-
-    background-position:
-        center,
-        center right;
-
-    background-size:
-        100% 100%,
-        auto 100%;
+    background-position:center right;
+    background-size:cover;
 
     z-index:0;
 }
 
+
+/* =========================
+   BLUE OVERLAY
+   ========================= */
+
+.banner::after{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(3,35,105,.98) 0%,
+            rgba(3,35,105,.92) 25%,
+            rgba(3,35,105,.72) 42%,
+            rgba(3,35,105,.35) 58%,
+            rgba(3,35,105,.05) 75%,
+            rgba(3,35,105,0) 100%
+        );
+
+    z-index:1;
+
+    pointer-events:none;
+}
 
 /* =========================
    BANNER TEXT
@@ -275,7 +290,7 @@ color:gray;
 .banner-text{
     position:relative;
 
-    z-index:2;
+    z-index:3;
 
     width:52%;
     padding-left:20px;
