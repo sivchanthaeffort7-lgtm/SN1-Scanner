@@ -225,28 +225,32 @@ color:gray;
     align-items:center;
 
     padding:35px 45px;
-    color:white;
+    box-sizing:border-box;
 
     background:#06356f;
+    color:white;
 
-    box-shadow:
-        0 18px 40px rgba(0,0,0,.20);
+    box-shadow:0 18px 40px rgba(0,0,0,.20);
 }
-/* JUKI IMAGE - SOFT OVERLAY */
+
+
+/* =========================
+   JUKI IMAGE + OVERLAY
+   ========================= */
 
 .banner::before{
     content:"";
-    position:absolute;
 
+    position:absolute;
     inset:0;
 
     background-image:
         linear-gradient(
             90deg,
             rgba(3,35,105,.92) 0%,
-            rgba(3,35,105,.72) 25%,
-            rgba(3,35,105,.25) 45%,
-            rgba(3,35,105,.05) 60%
+            rgba(3,35,105,.72) 28%,
+            rgba(3,35,105,.25) 52%,
+            rgba(3,35,105,.05) 75%
         ),
         url("../images/Juki.png");
 
@@ -257,13 +261,12 @@ color:gray;
         center right;
 
     background-size:
-        cover,
-        cover;
+        100% 100%,
+        auto 100%;
 
-    opacity:1;
+    z-index:0;
+}
 
-    z-index:1;
-}  
 
 /* =========================
    BANNER TEXT
@@ -271,18 +274,19 @@ color:gray;
 
 .banner-text{
     position:relative;
-    z-index:3;
 
-    width:50%;
-    padding-left:55px;
-    padding-right:25px;
+    z-index:2;
+
+    width:52%;
+    padding-left:20px;
+    padding-right:20px;
+
+    box-sizing:border-box;
 
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:flex-start;
-
-    box-sizing:border-box;
 }
 
 
@@ -298,8 +302,7 @@ color:gray;
 
     color:#ffffff;
 
-    text-shadow:
-        0 3px 10px rgba(0,0,0,.45);
+    text-shadow:0 3px 10px rgba(0,0,0,.45);
 }
 
 
@@ -315,8 +318,7 @@ color:gray;
 
     color:#ffffff;
 
-    text-shadow:
-        0 4px 14px rgba(0,0,0,.50);
+    text-shadow:0 4px 14px rgba(0,0,0,.50);
 }
 
 
@@ -333,8 +335,7 @@ color:gray;
 
     color:#eaf3ff;
 
-    text-shadow:
-        0 2px 8px rgba(0,0,0,.40);
+    text-shadow:0 2px 8px rgba(0,0,0,.40);
 }
 
 
@@ -348,8 +349,11 @@ color:gray;
 
     padding:0 20px;
 
+    box-sizing:border-box;
+
     border:none;
     outline:none;
+
     border-radius:25px;
 
     background:rgba(255,255,255,.94);
@@ -359,43 +363,44 @@ color:gray;
     font-family:'Kantumruy Pro',sans-serif;
     font-size:15px;
 
-    box-shadow:
-        0 6px 20px rgba(0,0,0,.20);
+    box-shadow:0 6px 20px rgba(0,0,0,.20);
 }
 
 
 .banner-text input::placeholder{
     color:#7b8ba8;
 }
-/* MOBILE / SMALL SCREEN */
+
+
+/* =========================
+   MOBILE
+   ========================= */
 
 @media(max-width:900px){
 
     .banner{
         height:300px;
-        padding:35px;
+        padding:30px;
     }
 
     .banner::before{
-        width:75%;
-
         background-size:
             100% 100%,
-            auto 110%;
+            auto 100%;
     }
 
     .banner-text{
         width:65%;
+        padding-left:10px;
     }
 
     .banner-text h1{
-        font-size:58px;
+        font-size:48px;
     }
 
     .banner-text h2{
-        font-size:28px;
+        font-size:24px;
     }
-
 }
 
 
@@ -407,21 +412,34 @@ color:gray;
     }
 
     .banner::before{
-        width:100%;
+        background-image:
+            linear-gradient(
+                90deg,
+                rgba(3,35,105,.90),
+                rgba(3,35,105,.45)
+            ),
+            url("../images/Juki.png");
 
-        opacity:.55;
+        background-size:
+            100% 100%,
+            auto 100%;
+
+        background-position:
+            center,
+            center right;
     }
 
     .banner-text{
         width:100%;
+        padding:0;
     }
 
     .banner-text h1{
-        font-size:48px;
+        font-size:42px;
     }
 
     .banner-text h2{
-        font-size:24px;
+        font-size:22px;
     }
 
     .banner-text p{
@@ -432,5 +450,4 @@ color:gray;
     .banner-text input{
         width:100%;
     }
-
 }
