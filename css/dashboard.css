@@ -44,8 +44,23 @@ text-align:center;
 border-bottom:1px solid rgba(255,255,255,.15);
 
 }
+.logo{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+}
+
+.logo-image{
+    width:42px;
+    height:42px;
+    object-fit:contain;
+    flex-shrink:0;
+}
 
 .logo h1{
+    margin:0;
+}.logo h1{
 
 font-size:40px;
 
