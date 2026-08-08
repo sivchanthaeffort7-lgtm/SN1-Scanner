@@ -710,33 +710,113 @@ color:gray;
 }
 
 .logo-image{
-    margin-right:-15px;
+    margin-right:-12px;
 }
-/* TOP RIGHT - POSITION FIX */
-.top-right{
+/* =========================
+   TOP HEADER ABOVE BANNER
+   ========================= */
+
+.main{
+    position:relative;
+}
+
+/* MENU BUTTON */
+.menu-btn{
+    position:absolute;
+    top:20px;
+    left:30px;
+
+    z-index:100;
+
+    width:42px;
+    height:42px;
+
     display:flex;
     align-items:center;
-    gap:12px;
-    margin-left:auto;
+    justify-content:center;
+
+    background:#ffffff;
+    border-radius:10px;
+
+    color:#1456c0;
+
+    cursor:pointer;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
 }
+
+
+/* TOP RIGHT */
+.top-right{
+    position:absolute;
+
+    top:20px;
+    right:30px;
+
+    z-index:100;
+
+    display:flex;
+    align-items:center;
+
+    gap:18px;
+}
+
+
+/* BELL */
+.bell{
+    font-size:20px;
+    color:#1456c0;
+}
+
 
 /* PROFILE */
 .profile{
     display:flex;
     align-items:center;
-    gap:12px;
+
+    gap:10px;
+
+    background:#ffffff;
+    padding:6px 12px 6px 6px;
+
+    border-radius:25px;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
 }
 
-/* NAME + ADMINISTRATOR */
+
+/* PROFILE IMAGE */
+.profile img{
+    width:38px;
+    height:38px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+}
+
+
+/* NAME */
 .profile h4{
     margin:0;
-    font-size:15px;
+
+    font-size:14px;
     line-height:1.2;
 }
 
+
+/* ADMINISTRATOR */
 .profile small{
     display:block;
-    margin-top:3px;
-    font-size:12px;
-    line-height:1.2;
+
+    margin-top:2px;
+
+    font-size:10px;
+    color:#7b8ba8;
+}
+
+
+/* BANNER GOES BELOW HEADER */
+.banner{
+    margin-top:75px;
 }
