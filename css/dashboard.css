@@ -44,7 +44,7 @@ box-shadow:8px 0 25px rgba(0,0,0,.18);
 
     display:flex;
     align-items:center;
-    gap:6px;
+    gap:2px;
 }
 .logo{
     display:flex;
@@ -64,7 +64,7 @@ box-shadow:8px 0 25px rgba(0,0,0,.18);
     margin:0;
 }.logo h1{
 
-font-size:44px;
+font-size:48px;
 margin:0;
 text-align:left;
 
