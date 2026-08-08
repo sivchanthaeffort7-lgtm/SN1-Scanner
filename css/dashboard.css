@@ -44,18 +44,18 @@ box-shadow:8px 0 25px rgba(0,0,0,.18);
 
     display:flex;
     align-items:center;
-    gap:2px;
+    gap:1px;
 }
 .logo{
     display:flex;
     align-items:center;
     justify-content:center;
-    gap:2px;
+    gap:1px;
 }
 
 .logo-image{
-    width:95px;
-    height:95px;
+    width:98px;
+    height:98px;
     object-fit:contain;
     flex-shrink:0;
 }
