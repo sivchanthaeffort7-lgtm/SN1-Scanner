@@ -466,3 +466,63 @@ color:gray;
         width:100%;
     }
 }
+/* =========================
+   FINAL BANNER FIX
+   ========================= */
+
+.banner::after{
+    z-index:1;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(3,35,105,.96) 0%,
+            rgba(3,35,105,.88) 25%,
+            rgba(3,35,105,.60) 45%,
+            rgba(3,35,105,.22) 65%,
+            rgba(3,35,105,0) 100%
+        );
+}
+
+.banner-text{
+    position:relative !important;
+    z-index:10 !important;
+
+    opacity:1 !important;
+
+    width:52% !important;
+
+    color:#ffffff !important;
+}
+
+.banner-text h1,
+.banner-text h2,
+.banner-text p{
+    opacity:1 !important;
+    visibility:visible !important;
+    position:relative !important;
+    z-index:11 !important;
+}
+
+.banner-text h1{
+    color:#ffffff !important;
+    font-size:50px !important;
+    text-shadow:0 3px 12px rgba(0,0,0,.65) !important;
+}
+
+.banner-text h2{
+    color:#ffffff !important;
+    font-size:24px !important;
+    text-shadow:0 2px 8px rgba(0,0,0,.60) !important;
+}
+
+.banner-text p{
+    color:#ffffff !important;
+    font-size:15px !important;
+    text-shadow:0 2px 8px rgba(0,0,0,.55) !important;
+}
+
+.banner-text input{
+    position:relative !important;
+    z-index:11 !important;
+    opacity:1 !important;
+}
