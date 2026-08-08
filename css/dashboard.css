@@ -1,8 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Bokor&family=Kantumruy+Pro:wght@300;400;500;700&display=swap');*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Kantumruy Pro',sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Bokor&family=Kantumruy+Pro:wght@300;400;500;700&display=swap');
+*{
+    
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Kantumruy Pro',sans-serif;
 }
 
 body{
@@ -206,119 +208,244 @@ color:gray;
 
 }
 
+/* =========================
+   DASHBOARD BANNER
+   ========================= */
+
 .banner{
+    position:relative;
+    width:100%;
+    height:320px;
+    margin-top:20px;
 
-position:relative;
+    border-radius:25px;
+    overflow:hidden;
 
-height:360px;
-
-background:linear-gradient(90deg,#06255e,#0a49b5);
-
-border-radius:28px;
-
-overflow:hidden;
-
-display:flex;
-
-align-items:center;
-
-justify-content:space-between;
-
-padding:55px;
-
-box-shadow:0 20px 45px rgba(0,0,0,.25);
-
-}
-
-.banner-overlay{
-
-position:absolute;
-
-inset:0;
-
-background:linear-gradient(
-
-90deg,
-
-rgba(3,25,70,.82),
-
-rgba(3,25,70,.45),
-
-rgba(3,25,70,0)
-
-);
-
-z-index:1;
-
-}
-
-.banner .left{
-
-position:relative;
-
-z-index:3;
-
-width:45%;
-
-}
-
-.banner-img{
-
-position:absolute;
-
-right:-20px;
-
-bottom:0;
-
-height:100%;
-
-z-index:2;
-
-filter:drop-shadow(0 18px 25px rgba(0,0,0,.35));
-
-}}.banner{
-    position: relative;
-    width: 100%;
-    height: 320px;
-    border-radius: 20px;
-    overflow: hidden;
-    background: linear-gradient(90deg,#0b4fd9,#123f97);
     display:flex;
     align-items:center;
-    justify-content:space-between;
-    padding:40px;
+
+    padding:45px 50px;
+
     color:white;
-    margin-top:20px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(3,35,105,.96) 0%,
+            rgba(8,55,135,.88) 45%,
+            rgba(10,65,150,.45) 100%
+        );
+
+    box-shadow:
+        0 18px 40px rgba(0,0,0,.20);
 }
+
+
+/* JUKI IMAGE — OVERLAY */
 
 .banner::before{
     content:"";
+
     position:absolute;
-    inset:0;
-    background:url("../images/juki.png") no-repeat right center;
-    background-size:420px;
+    top:0;
+    right:0;
+    bottom:0;
+
+    width:65%;
+
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(3,35,105,.95) 0%,
+            rgba(3,35,105,.45) 25%,
+            rgba(3,35,105,.05) 65%
+        ),
+        url("../images/Juki.png");
+
+    background-repeat:no-repeat;
+
+    background-position:
+        center,
+        right center;
+
+    background-size:
+        100% 100%,
+        auto 125%;
+
     opacity:.95;
+
+    z-index:1;
 }
 
-.banner .left{
+
+/* TEXT AREA */
+
+.banner-text{
     position:relative;
+
     z-index:2;
-    width:55%;
+
+    width:58%;
+
+    padding-right:20px;
 }
 
-.banner h1{
-    font-size:52px;
-    margin:0;
-    font-weight:700;
+
+/* SMALL KHMER HEADER */
+
+.banner-text h2{
+    margin:0 0 5px;
+
+    font-family:'Bokor',serif;
+
+    font-size:34px;
+
+    line-height:1.25;
+
+    color:#ffffff;
+
+    text-shadow:
+        0 4px 14px rgba(0,0,0,.40);
 }
 
-.banner h2{
-    font-size:28px;
-    margin:0;
+
+/* MAIN SN1 */
+
+.banner-text h1{
+    margin:0 0 12px;
+
+    font-family:'Bokor',serif;
+
+    font-size:72px;
+
+    line-height:.95;
+
+    font-weight:400;
+
+    color:#ffffff;
+
+    text-shadow:
+        0 6px 20px rgba(0,0,0,.45);
 }
 
-.banner p{
-    margin-top:12px;
-    color:#dce8ff;
+
+/* DESCRIPTION */
+
+.banner-text p{
+    margin:0 0 25px;
+
+    font-family:'Kantumruy Pro',sans-serif;
+
+    font-size:17px;
+
     line-height:1.8;
+
+    color:#e8f1ff;
+
+    text-shadow:
+        0 3px 10px rgba(0,0,0,.35);
+}
+
+
+/* SEARCH BOX */
+
+.banner-text input{
+    width:350px;
+
+    max-width:100%;
+
+    height:52px;
+
+    padding:0 22px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:30px;
+
+    background:rgba(255,255,255,.96);
+
+    color:#183b78;
+
+    font-family:'Kantumruy Pro',sans-serif;
+
+    font-size:15px;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.18);
+}
+
+
+.banner-text input::placeholder{
+    color:#7b8ba8;
+}
+
+
+/* MOBILE / SMALL SCREEN */
+
+@media(max-width:900px){
+
+    .banner{
+        height:300px;
+        padding:35px;
+    }
+
+    .banner::before{
+        width:75%;
+
+        background-size:
+            100% 100%,
+            auto 110%;
+    }
+
+    .banner-text{
+        width:65%;
+    }
+
+    .banner-text h1{
+        font-size:58px;
+    }
+
+    .banner-text h2{
+        font-size:28px;
+    }
+
+}
+
+
+@media(max-width:600px){
+
+    .banner{
+        height:280px;
+        padding:25px;
+    }
+
+    .banner::before{
+        width:100%;
+
+        opacity:.55;
+    }
+
+    .banner-text{
+        width:100%;
+    }
+
+    .banner-text h1{
+        font-size:48px;
+    }
+
+    .banner-text h2{
+        font-size:24px;
+    }
+
+    .banner-text p{
+        font-size:14px;
+        line-height:1.6;
+    }
+
+    .banner-text input{
+        width:100%;
+    }
+
 }
