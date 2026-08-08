@@ -50,7 +50,7 @@ box-shadow:8px 0 25px rgba(0,0,0,.18);
     display:flex;
     align-items:center;
     justify-content:center;
-    gap:10px;
+    gap:2px;
 }
 
 .logo-image{
