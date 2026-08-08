@@ -710,5 +710,33 @@ color:gray;
 }
 
 .logo-image{
-    margin-right:-10px;
+    margin-right:-15px;
+}
+/* TOP RIGHT - POSITION FIX */
+.top-right{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-left:auto;
+}
+
+/* PROFILE */
+.profile{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+/* NAME + ADMINISTRATOR */
+.profile h4{
+    margin:0;
+    font-size:15px;
+    line-height:1.2;
+}
+
+.profile small{
+    display:block;
+    margin-top:3px;
+    font-size:12px;
+    line-height:1.2;
 }
