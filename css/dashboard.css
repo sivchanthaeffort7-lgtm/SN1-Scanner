@@ -705,3 +705,10 @@ color:gray;
 .banner .left input::placeholder{
     color:#7b8ba8;
 }
+.logo{
+    gap:0;
+}
+
+.logo-image{
+    margin-right:-20px;
+}
