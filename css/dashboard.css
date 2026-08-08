@@ -55,7 +55,7 @@ box-shadow:8px 0 25px rgba(0,0,0,.18);
 
 .logo-image{
     width:100px;
-    height:100px;
+    height:110px;
     object-fit:contain;
     flex-shrink:0;
 }
@@ -64,7 +64,7 @@ box-shadow:8px 0 25px rgba(0,0,0,.18);
     margin:0;
 }.logo h1{
 
-font-size:48px;
+font-size:45px;
 margin:0;
 padding:0;
 text-align:left;
@@ -73,7 +73,7 @@ text-align:left;
 
 .logo p{
 
-font-size:10px;
+font-size:12px;
 
 opacity:.8;
 margin:0;
@@ -710,5 +710,5 @@ color:gray;
 }
 
 .logo-image{
-    margin-right:-20px;
+    margin-right:-10px;
 }
