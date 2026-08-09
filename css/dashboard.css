@@ -906,18 +906,18 @@ color:gray;
 }
 
 .summary-card small {
-    font-size: 13px;
+    font-size: 23px;
     color: #7b8798;
     margin-bottom: 3px;
 }
 
 .summary-card strong {
-    font-size: 26px;
+    font-size: 36px;
     line-height: 1.1;
     color: #174ea6;
 }
 
 .summary-card span {
-    font-size: 11px;
+    font-size: 21px;
     color: #8b95a5;
 }
