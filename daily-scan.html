@@ -1,1 +1,153 @@
+<!DOCTYPE html>
+<html lang="km">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Daily Scan - SN1</title>
+
+    <link rel="stylesheet" href="css/dashboard.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <div class="logo">
+
+        <img src="images/logo.png" class="logo-image">
+
+        <div>
+            <h1>SN1</h1>
+            <p>Warehouse System</p>
+        </div>
+
+    </div>
+
+    <ul>
+
+        <li onclick="goToPage('index.html')">
+            <i class="fa-solid fa-house"></i>
+            ទំព័រដើម
+        </li>
+
+        <li class="active">
+            <i class="fa-solid fa-camera"></i>
+            ស្កេនប្រចាំថ្ងៃ
+        </li>
+
+        <li>
+            <i class="fa-solid fa-calendar"></i>
+            សរុបប្រចាំខែ
+        </li>
+
+        <li>
+            <i class="fa-solid fa-magnifying-glass"></i>
+            ស្វែងរកម៉ាស៊ីន
+        </li>
+
+        <li>
+            <i class="fa-solid fa-chart-column"></i>
+            របាយការណ៍
+        </li>
+
+        <li>
+            <i class="fa-solid fa-users"></i>
+            អ្នកប្រើប្រាស់
+        </li>
+
+        <li>
+            <i class="fa-solid fa-gear"></i>
+            ការកំណត់
+        </li>
+
+    </ul>
+
+    <div class="logout-btn">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <span>ចាកចេញ</span>
+    </div>
+
+</div>
+
+
+<div class="main-content">
+
+    <div class="topbar">
+
+        <div class="menu-btn">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+
+        <div class="top-right">
+
+            <i class="fa-regular fa-bell bell"></i>
+
+            <div class="profile">
+
+                <img src="https://i.pravatar.cc/60">
+
+                <div>
+                    <h4>Chantha Siv</h4>
+                    <small>Administrator</small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-content">
+
+        <div class="page-title">
+
+            <h2>
+                <i class="fa-solid fa-camera"></i>
+                ស្កេនម៉ាស៊ីនប្រចាំថ្ងៃ
+            </h2>
+
+            <p>
+                កត់ត្រា និងពិនិត្យស្ថានភាពម៉ាស៊ីនប្រចាំថ្ងៃ
+            </p>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <i class="fa-solid fa-qrcode"></i>
+
+            <div>
+
+                <small>ស្កេនលេខម៉ាស៊ីន</small>
+
+                <strong>
+                    ស្កេន ឬបញ្ចូលលេខម៉ាស៊ីន
+                </strong>
+
+                <input
+                    type="text"
+                    placeholder="បញ្ចូលលេខម៉ាស៊ីន..."
+                >
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="js/dashboard.js"></script>
+
+</body>
+</html>
