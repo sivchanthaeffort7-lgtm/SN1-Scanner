@@ -82,7 +82,7 @@
         }
 
         #reader {
-            width: 350%;
+            width: 150%;
             max-width: 600px;
             margin: 20px auto;
         }
@@ -351,8 +351,8 @@ function startScanner() {
 
             const text = String(decodedText).trim();
 
-            // Only accept Machine ID in format SNL-1234
-            const match = text.match(/\b[A-Z]+-\d+\b/i);
+            // Only accept Machine ID format: letters/numbers + hyphen + numbers
+            const match = text.match(/\b[A-Z0-9]+-\d+\b/i);
 
 if (!match) {
     showStatus(
