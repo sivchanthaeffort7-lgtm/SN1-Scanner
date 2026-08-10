@@ -28,21 +28,7 @@
             box-shadow: 0 4px 15px rgba(0,0,0,.08);
         }
 
-        .scan-input-group {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .scan-input-group input {
-            flex: 1;
-            padding: 13px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-family: inherit;
-            font-size: 16px;
-            box-sizing: border-box;
-        }
+        
 
         .scan-btn {
             padding: 13px 18px;
@@ -253,79 +239,29 @@
 
             </div>
 
+<div class="action-box">
 
+    <label for="machineAction">
+        សកម្មភាព
+    </label>
 
-            <div class="scan-input-group">
+    <select id="action">
 
-                <input
-                    type="text"
-                    id="machineNumber"
-                    placeholder="ឧ. SNL-0001"
-                    autocomplete="off"
-                >
+    <option value="">-- ជ្រើសសកម្មភាព --</option>
 
-                <button
-                    class="scan-btn"
-                    onclick="startScanner()"
-                >
-                    <i class="fa-solid fa-camera"></i>
-                    ស្កេន
-                </button>
+    <option value="OUT">ចេញ</option>
 
-            </div>
+    <option value="IN">ចូល</option>
 
+    <option value="CHANGE_OUT">ប្ដូរចេញ</option>
 
+    <option value="CHANGE_IN">ប្ដូរចូល</option>
 
-            <div class="scanner-area" id="scannerArea">
+    <option value="SOLD">លក់ចេញ</option>
 
-                <div id="reader"></div>
-
-                <button
-                    class="scan-btn"
-                    onclick="stopScanner()"
-                >
-                    បិទ Camera
-                </button>
-
-            </div>
-
-
-
-            <div class="action-area">
-
-                <label for="action">
-                    សកម្មភាព
-                </label>
-
-                <select id="action">
-
-                    <option value="DAILY">
-                        ស្កេនប្រចាំថ្ងៃ
-                    </option>
-
-                    <option value="MONTHLY">
-                        សរុបប្រចាំខែ
-                    </option>
-
-                    <option value="CHECK">
-                        ពិនិត្យម៉ាស៊ីន
-                    </option>
-
-                    <option value="REPAIR">
-                        ជួសជុល
-                    </option>
-
-                    <option value="RETURN">
-                        ប្រគល់ត្រឡប់
-                    </option>
-
-                </select>
-
-            </div>
-
-
-
-            <button
+</select>
+</div>    
+               <button
                 class="save-btn"
                 onclick="saveMachine()"
             >
@@ -380,12 +316,19 @@ function startScanner() {
 
         function(decodedText) {
 
-            document.getElementById("machineNumber").value = decodedText;
+    let machineID = decodedText;
 
-            stopScanner();
+    // If QR contains a URL, extract SNL-xxxx from the URL
+    const match = decodedText.match(/SNL-\d+/i);
 
-        },
+    if (match) {
+        machineID = match[0].toUpperCase();
+    }
 
+    document.getElementById("machineNumber").value = machineID;
+
+    stopScanner();
+},
         function(errorMessage) {
 
             // Ignore continuous scanning errors
