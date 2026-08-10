@@ -9,11 +9,124 @@
 
     <link rel="stylesheet" href="css/dashboard.css">
 
-    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- QR / Barcode Scanner -->
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+
+    <style>
+
+        .scan-box {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,.08);
+        }
+
+        .scan-input-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .scan-input-group input {
+            flex: 1;
+            padding: 13px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .scan-btn {
+            padding: 13px 18px;
+            border: none;
+            border-radius: 8px;
+            background: #1565c0;
+            color: white;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 15px;
+        }
+
+        .scan-btn:hover {
+            background: #0d47a1;
+        }
+
+        .action-area {
+            margin-top: 25px;
+        }
+
+        .action-area label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .action-area select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .save-btn {
+            width: 100%;
+            margin-top: 20px;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #198754;
+            color: white;
+            font-family: inherit;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .save-btn:hover {
+            background: #157347;
+        }
+
+        #reader {
+            width: 100%;
+            max-width: 450px;
+            margin: 20px auto;
+        }
+
+        .scanner-area {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .status {
+            margin-top: 15px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .success {
+            color: #198754;
+        }
+
+        .error {
+            color: #dc3545;
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
@@ -29,6 +142,7 @@
         </div>
 
     </div>
+
 
     <ul>
 
@@ -69,17 +183,21 @@
 
     </ul>
 
+
     <div class="logout-btn">
+
         <i class="fa-solid fa-right-from-bracket"></i>
+
         <span>ចាកចេញ</span>
+
     </div>
 
 </div>
 
 
-<div class="main-content">
 
-    <div class="topbar">
+<div class="main-content">
+<div class="topbar">
 
         <div class="menu-btn">
             <i class="fa-solid fa-bars"></i>
@@ -105,6 +223,7 @@
     </div>
 
 
+
     <div class="dashboard-content">
 
         <div class="page-title">
@@ -121,33 +240,105 @@
         </div>
 
 
-        <div class="summary-card">
 
-            <i class="fa-solid fa-qrcode"></i>
+        <div class="scan-box">
 
             <div>
 
                 <small>ស្កេនលេខម៉ាស៊ីន</small>
 
-                <strong>
-                    ស្កេន ឬបញ្ចូលលេខម៉ាស៊ីន
+                <strong style="display:block; margin-top:5px;">
+                    ស្កេន QR / Barcode ឬបញ្ចូលលេខម៉ាស៊ីន
                 </strong>
 
-                <div class="scan-input-group">
-
-    <input
-        type="text"
-        id="machineNumber"
-        placeholder="បញ្ចូលលេខម៉ាស៊ីន..."
-    >
-
-    <button onclick="scanMachine()">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        ស្វែងរក
-    </button>
-
-</div>
             </div>
+
+
+
+            <div class="scan-input-group">
+
+                <input
+                    type="text"
+                    id="machineNumber"
+                    placeholder="ឧ. SNL-0001"
+                    autocomplete="off"
+                >
+
+                <button
+                    class="scan-btn"
+                    onclick="startScanner()"
+                >
+                    <i class="fa-solid fa-camera"></i>
+                    ស្កេន
+                </button>
+
+            </div>
+
+
+
+            <div class="scanner-area" id="scannerArea">
+
+                <div id="reader"></div>
+
+                <button
+                    class="scan-btn"
+                    onclick="stopScanner()"
+                >
+                    បិទ Camera
+                </button>
+
+            </div>
+
+
+
+            <div class="action-area">
+
+                <label for="action">
+                    សកម្មភាព
+                </label>
+
+                <select id="action">
+
+                    <option value="DAILY">
+                        ស្កេនប្រចាំថ្ងៃ
+                    </option>
+
+                    <option value="MONTHLY">
+                        សរុបប្រចាំខែ
+                    </option>
+
+                    <option value="CHECK">
+                        ពិនិត្យម៉ាស៊ីន
+                    </option>
+
+                    <option value="REPAIR">
+                        ជួសជុល
+                    </option>
+
+                    <option value="RETURN">
+                        ប្រគល់ត្រឡប់
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <button
+                class="save-btn"
+                onclick="saveMachine()"
+            >
+                <i class="fa-solid fa-floppy-disk"></i>
+                រក្សាទុក
+            </button>
+
+
+
+            <div
+                id="status"
+                class="status"
+            ></div>
 
         </div>
 
@@ -156,7 +347,208 @@
 </div>
 
 
+
 <script src="js/dashboard.js"></script>
 
+
+<script>
+
+let scanner = null;
+
+
+
+function startScanner() {
+
+    const area = document.getElementById("scannerArea");
+
+    area.style.display = "block";
+
+    if (scanner) {
+        return;
+    }
+
+    scanner = new Html5Qrcode("reader");
+
+    scanner.start(
+
+        { facingMode: "environment" },
+
+        {
+            fps: 10,
+            qrbox: 250
+        },
+
+        function(decodedText) {
+
+            document.getElementById("machineNumber").value = decodedText;
+
+            stopScanner();
+
+        },
+
+        function(errorMessage) {
+
+            // Ignore continuous scanning errors
+
+        }
+
+    ).catch(function(error) {
+
+        showStatus(
+            "មិនអាចបើក Camera បានទេ",
+            false
+        );
+
+    });
+
+}
+
+
+
+function stopScanner() {
+
+    if (!scanner) {
+        document.getElementById("scannerArea").style.display = "none";
+        return;
+    }
+
+    scanner.stop()
+        .then(function() {
+
+            scanner.clear();
+
+            scanner = null;
+
+            document.getElementById("scannerArea").style.display = "none";
+
+        })
+    .catch(function() {
+
+            scanner = null;
+
+            document.getElementById("scannerArea").style.display = "none";
+
+        });
+
+}
+
+
+
+function saveMachine() {
+
+    const machine =
+        document.getElementById("machineNumber").value.trim();
+
+    const action =
+        document.getElementById("action").value;
+
+
+
+    if (!machine) {
+
+        showStatus(
+            "សូមស្កេន ឬបញ្ចូលលេខម៉ាស៊ីនជាមុនសិន",
+            false
+        );
+
+        return;
+
+    }
+
+
+
+    showStatus(
+        "កំពុងរក្សាទុក...",
+        true
+    );
+
+
+
+    /*
+     * API URL របស់ Apps Script
+     * យើងនឹងភ្ជាប់ URL ពិតរបស់ project
+     * នៅជំហានបន្ទាប់
+     */
+
+    const API_URL = "https://script.google.com/macros/s/AKfycbzDMYa0DttaLXrVscufwKhMNoJyNqORRL58EQzMmT0MB-UKQYR2IeRKA-qhnkaGG5Wt/exec";
+
+
+
+    fetch(API_URL, {
+
+        method: "POST",
+
+        headers: {
+            "Content-Type": "text/plain;charset=utf-8"
+        },
+
+        body: JSON.stringify({
+
+            action: "saveScan",
+
+            machineID: machine,
+
+            scanAction: action
+
+        })
+
+    })
+
+    .then(response => response.json())
+
+    .then(data => {
+
+        if (data.success) {
+
+            showStatus(
+                "✅ បានរក្សាទុកដោយជោគជ័យ",
+                true
+            );
+
+            document.getElementById("machineNumber").value = "";
+
+        } else {
+
+            showStatus(
+                "❌ " + (data.message || "រក្សាទុកមិនបាន"),
+                false
+            );
+
+        }
+
+    })
+
+    .catch(error => {
+
+        console.error(error);
+
+        showStatus(
+            "❌ មិនអាចភ្ជាប់ទៅ Server បានទេ",
+            false
+        );
+
+    });
+
+}
+
+
+
+function showStatus(message, success) {
+
+    const status =
+        document.getElementById("status");
+
+    status.innerHTML = message;
+
+    status.className =
+        "status " + (success ? "success" : "error");
+
+}
+
+
+
+</script>
+
 </body>
+
 </html>
