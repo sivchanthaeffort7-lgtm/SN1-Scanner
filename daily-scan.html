@@ -270,7 +270,7 @@
 
 </div><div class="action-box">
 
-    <label for="machineAction">
+    <label for="action">
         សកម្មភាព
     </label>
 
@@ -416,7 +416,7 @@ function saveMachine() {
 
 
 
-    if (!machine) {
+    if (!action) {
 
         showStatus(
             "សូមស្កេន ឬបញ្ចូលលេខម៉ាស៊ីនជាមុនសិន",
@@ -460,7 +460,7 @@ function saveMachine() {
 
             machineID: machine,
 
-            scanAction: action
+            scanAction: action,
 
             username: localStorage.getItem("username") || ""
 
