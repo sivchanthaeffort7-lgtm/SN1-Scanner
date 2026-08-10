@@ -352,14 +352,17 @@ function startScanner() {
             const text = String(decodedText).trim();
 
             // Only accept Machine ID in format SNL-1234
-            const match = text.match(/\bSNL-\d+\b/i);
+            const match = text.match(/\b(?:SNL|AMS)-\d+\b/i);
 
-            if (!match) {
-                return;
-            }
+if (!match) {
+    showStatus(
+        "❌ QR នេះមិនមានលេខម៉ាស៊ីនត្រឹមត្រូវទេ",
+        false
+    );
+    return;
+}
 
-            const machineID = match[0].toUpperCase();
-
+const machineID = match[0].toUpperCase();
             document.getElementById("machineNumber").value = machineID;
 
             showStatus(
