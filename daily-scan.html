@@ -340,24 +340,36 @@ function startScanner() {
 
         {
             fps: 10,
-            qrbox: 250
+            qrbox: {
+                width: 300,
+                height: 300
+            },
+            aspectRatio: 1.0
         },
 
         function(decodedText) {
 
-    let machineID = decodedText;
+            const text = String(decodedText).trim();
 
-    // If QR contains a URL, extract SNL-xxxx from the URL
-    const match = decodedText.match(/SNL-\d+/i);
+            // Only accept Machine ID in format SNL-1234
+            const match = text.match(/\bSNL-\d+\b/i);
 
-    if (match) {
-        machineID = match[0].toUpperCase();
-    }
+            if (!match) {
+                return;
+            }
 
-    document.getElementById("machineNumber").value = machineID;
+            const machineID = match[0].toUpperCase();
 
-    stopScanner();
-},
+            document.getElementById("machineNumber").value = machineID;
+
+            showStatus(
+                "✅ បានស្កេន: " + machineID,
+                true
+            );
+
+            stopScanner();
+        },
+
         function(errorMessage) {
 
             // Ignore continuous scanning errors
@@ -366,15 +378,18 @@ function startScanner() {
 
     ).catch(function(error) {
 
+        console.error("Camera error:", error);
+
         showStatus(
-            "មិនអាចបើក Camera បានទេ",
+            "❌ មិនអាចបើក Camera បានទេ",
             false
         );
 
+        scanner = null;
+        area.style.display = "none";
     });
 
 }
-
 
 
 function stopScanner() {
