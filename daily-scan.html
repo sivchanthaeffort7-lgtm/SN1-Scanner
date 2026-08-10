@@ -28,8 +28,6 @@
             box-shadow: 0 4px 15px rgba(0,0,0,.08);
         }
 
-        
-
         .scan-btn {
             padding: 13px 18px;
             border: none;
@@ -234,12 +232,43 @@
                 <small>ស្កេនលេខម៉ាស៊ីន</small>
 
                 <strong style="display:block; margin-top:5px;">
-                    ស្កេន QR / Barcode ឬបញ្ចូលលេខម៉ាស៊ីន
+                    ស្កេន QR / Barcode បញ្ចូលលេខម៉ាស៊ីន
                 </strong>
 
             </div>
+<div class="scan-input-group">
 
-<div class="action-box">
+    <input
+        type="text"
+        id="machineNumber"
+        placeholder="ស្កេនលេខម៉ាស៊ីន..."
+        autocomplete="off"
+        readonly
+    >
+
+    <button
+        type="button"
+        class="scan-btn"
+        onclick="startScanner()">
+        <i class="fa-solid fa-camera"></i>
+        ស្កេន
+    </button>
+
+</div>
+
+<div class="scanner-area" id="scannerArea" style="display:none;">
+
+    <div id="reader"></div>
+
+    <button
+        type="button"
+        class="scan-btn"
+        onclick="stopScanner()">
+        <i class="fa-solid fa-camera"></i>
+        បិទ Camera
+    </button>
+
+</div><div class="action-box">
 
     <label for="machineAction">
         សកម្មភាព
