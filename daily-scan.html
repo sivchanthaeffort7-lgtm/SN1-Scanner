@@ -107,6 +107,73 @@
             color: #dc3545;
         }
 
+        .scan-history {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.history-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.history-title i {
+    margin-right: 8px;
+}
+
+.history-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 14px;
+    margin-bottom: 10px;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.history-info {
+    flex: 1;
+}
+
+.history-machine {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.history-detail {
+    margin-top: 5px;
+    font-size: 13px;
+    color: #666;
+}
+
+.delete-scan-btn {
+    border: none;
+    background: #dc3545;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.delete-scan-btn:hover {
+    background: #bb2d3b;
+}
+
+.delete-disabled {
+    color: #999;
+    font-size: 12px;
+}
+
+.history-empty {
+    text-align: center;
+    color: #888;
+    padding: 15px;
+}
+
     </style>
 
 </head>
@@ -304,6 +371,20 @@
                 id="status"
                 class="status"
             ></div>
+            <div class="scan-history">
+
+    <div class="history-title">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+        ស្កេនថ្ងៃនេះ
+    </div>
+
+    <div id="scanHistory">
+        <div class="history-empty">
+            មិនទាន់មានការស្កេននៅឡើយទេ
+        </div>
+    </div>
+
+</div>
 
         </div>
 
@@ -523,8 +604,109 @@ function saveMachine() {
 
 }
 
+function loadScanHistory() {
 
+    const historyBox =
+        document.getElementById("scanHistory");
 
+    if (!historyBox) return;
+
+    historyBox.innerHTML =
+        '<div class="history-empty">កំពុងទាញទិន្នន័យ...</div>';
+
+    const API_URL =
+        "https://script.google.com/macros/s/AKfycbzDMYa0DttaLXrVscufwKhMNoJyNqORRL58EQzMmT0MB-UKQYR2IeRKA-qhnkaGG5Wt/exec";
+
+    fetch(API_URL, {
+
+        method: "POST",
+
+        headers: {
+            "Content-Type": "text/plain;charset=utf-8"
+        },
+
+        body: JSON.stringify({
+
+            action: "getHistory",
+
+            username:
+                localStorage.getItem("username") || ""
+
+        })
+
+    })
+
+    .then(response => response.json())
+
+    .then(data => {
+
+        if (!data.success) {
+
+            historyBox.innerHTML =
+                '<div class="history-empty">' +
+                'មិនអាចទាញ Scan History បានទេ' +
+                '</div>';
+
+            return;
+        }
+
+        if (!data.history || data.history.length === 0) {
+
+            historyBox.innerHTML =
+                '<div class="history-empty">' +
+                'មិនទាន់មានការស្កេនថ្ងៃនេះ' +
+                '</div>';
+
+            return;
+        }
+
+        historyBox.innerHTML = "";
+
+        data.history.forEach(item => {
+
+            const div =
+                document.createElement("div");
+
+            div.className = "history-item";
+
+            div.innerHTML = `
+                <div class="history-info">
+
+                    <div class="history-machine">
+                        ${item.machineID}
+                    </div>
+
+                    <div class="history-detail">
+                        ${item.action}
+                        · ${item.username || "-"}
+                        · ${item.time}
+                    </div>
+
+                </div>
+            `;
+
+            historyBox.appendChild(div);
+
+        });
+
+    })
+
+    .catch(error => {
+
+        console.error(error);
+
+        historyBox.innerHTML =
+            '<div class="history-empty">' +
+            '❌ មិនអាចភ្ជាប់ទៅ Server បានទេ' +
+            '</div>';
+
+    });
+}
+document.addEventListener("DOMContentLoaded", function () {
+
+    loadScanHistory();
+
+});
 function showStatus(message, success) {
 
     const status =
