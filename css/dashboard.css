@@ -344,15 +344,19 @@ color:gray;
     content:"";
 
     position:absolute;
-    inset:0;
+    top:0;
+    left:0;
+    bottom:0;
+  
+    width:30;
 
     background:
         linear-gradient(
             90deg,
             rgba(3,35,105,.98) 0%,
-            rgba(3,35,105,.90) 15%,
-            rgba(3,35,105,.60) 25%,
-            rgba(3,35,105,.0) 30%,
+            rgba(3,35,105,.85) 55%,
+            rgba(3,35,105,.35) 85%,
+            rgba(3,35,105,.0) 100%,
         );
 
     z-index:1;
