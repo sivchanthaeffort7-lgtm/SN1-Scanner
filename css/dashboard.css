@@ -324,7 +324,7 @@ color:gray;
     right:0;
     bottom:0;
 
-    width:62%;
+    width:100%;
 
     background-image:url("../images/Juki.png");
 
@@ -348,7 +348,7 @@ color:gray;
     left:0;
     bottom:0;
   
-    width:30;
+    width:25;
 
     background:
         linear-gradient(
