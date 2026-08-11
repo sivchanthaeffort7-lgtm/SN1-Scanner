@@ -66,6 +66,18 @@ box-shadow:8px 0 25px rgba(0,0,0,.18);
 }
 .sidebar.collapsed{
     width:80px;
+.sidebar.collapsed li{
+    font-size:0;
+}
+
+.sidebar.collapsed li i{
+    font-size:18px;
+}
+
+.sidebar.collapsed .logo h1,
+.sidebar.collapsed .logo p{
+    display:none;
+}
 }.logo{
     padding:25px 10px;
     text-align:left;
