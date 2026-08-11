@@ -166,17 +166,12 @@ padding:35px;
 
 }
 .topbar{
+    position:relative;
 
-display:flex;
+    display:block;
 
-justify-content:space-between;
-
-align-items:center;
-
-margin-bottom:25px;
-
+    margin-bottom:25px;
 }
-
 .menu-btn{
 
 width:45px;
