@@ -47,6 +47,7 @@ overflow:auto;
 .sidebar{
 
 width:260px;
+position:relative;
 
 background:linear-gradient(
 180deg,
@@ -64,7 +65,32 @@ flex-direction:column;
 box-shadow:8px 0 25px rgba(0,0,0,.18);
 
 }
+.sidebar-close{
+    position:absolute;
+    top:15px;
+    right:15px;
 
+    width:40px;
+    height:40px;
+
+    border:none;
+    border-radius:50%;
+
+    background:white;
+    color:#183b78;
+
+    font-size:20px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+    z-index:1000;
+}
+.sidebar.collapsed .sidebar-close{
+    display:none;
+}
 .sidebar.collapsed{
     width:0px;
     overflow:hidden;
