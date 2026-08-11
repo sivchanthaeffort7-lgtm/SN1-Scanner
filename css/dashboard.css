@@ -640,7 +640,7 @@ color:gray;
     content:none !important;
 }
 
-/* BLUE OVERLAY — LEFT 30% */
+/* BLUE OVERLAY — LEFT 40% */
 .banner::after{
     content:"" !important;
 
@@ -649,7 +649,7 @@ color:gray;
     left:0;
     bottom:0;
 
-    width:30%;
+    width:40%;
 
     background:
         linear-gradient(
@@ -676,7 +676,7 @@ color:gray;
     left:0;
     bottom:0;
 
-    width:30%;
+    width:40%;
 
     z-index:1;
 
