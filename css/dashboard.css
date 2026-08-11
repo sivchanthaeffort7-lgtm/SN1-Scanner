@@ -1184,3 +1184,67 @@ color:gray;
     width: 100%;
   }
 }
+/* =========================================
+   MACBOOK DASHBOARD FINAL SIZE
+   ========================================= */
+
+@media (min-width: 769px) {
+
+  /* DASHBOARD AREA */
+  .dashboard-content {
+    margin-left: 260px;
+    padding: 18px 28px;
+    width: calc(100% - 260px);
+    box-sizing: border-box;
+  }
+
+  /* TOP BANNER */
+  .banner {
+    height: 210px;
+    margin-top: 0;
+    padding: 25px 35px;
+    border-radius: 20px;
+  }
+
+  /* JUKI IMAGE - SHOW FULL IMAGE */
+  .banner::before {
+    width: 58%;
+    background-size: contain;
+    background-position: center right;
+    background-repeat: no-repeat;
+  }
+
+  /* BLUE OVERLAY */
+  .banner::after {
+    opacity: 0.88;
+  }
+
+  /* BANNER TEXT */
+  .banner-text {
+    width: 48%;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .banner-text h1 {
+    font-size: 36px;
+    line-height: 1.1;
+  }
+
+  .banner-text h2 {
+    font-size: 15px;
+  }
+
+  .banner-text p {
+    font-size: 11px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  /* SUMMARY CARDS */
+  .summary-cards {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 14px;
+  }
+}
