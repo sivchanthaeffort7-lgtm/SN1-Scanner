@@ -348,7 +348,7 @@ color:gray;
     left:0;
     bottom:0;
   
-    width:25;
+    width:25%;
 
     background:
         linear-gradient(
@@ -356,7 +356,7 @@ color:gray;
             rgba(3,35,105,.98) 0%,
             rgba(3,35,105,.85) 55%,
             rgba(3,35,105,.35) 85%,
-            rgba(3,35,105,.0) 100%,
+            rgba(3,35,105,0) 100%,
         );
 
     z-index:1;
@@ -650,7 +650,11 @@ color:gray;
 
 .banner-overlay{
     position:absolute;
-    inset:0;
+    top:0;
+    left:0;
+    bottom:0;
+
+    width:25%
 
     z-index:1;
 
@@ -658,11 +662,9 @@ color:gray;
         linear-gradient(
             90deg,
             rgba(3,35,105,.98) 0%,
-            rgba(3,35,105,.94) 25%,
-            rgba(3,35,105,.78) 42%,
-            rgba(3,35,105,.48) 58%,
-            rgba(3,35,105,.18) 72%,
-            rgba(3,35,105,0) 100%
+            rgba(3,35,105,.90) 45%,
+            rgba(3,35,105,.45) 75%,
+            rgba(3,35,105,0) 100%,
         );
 
     pointer-events:none;
