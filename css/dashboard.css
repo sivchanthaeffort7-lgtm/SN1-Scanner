@@ -64,7 +64,9 @@ flex-direction:column;
 box-shadow:8px 0 25px rgba(0,0,0,.18);
 
 }
-.logo{
+.sidebar.collapsed{
+    width:80px;
+}.logo{
     padding:25px 10px;
     text-align:left;
 
