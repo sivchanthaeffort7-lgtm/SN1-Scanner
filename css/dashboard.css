@@ -635,13 +635,35 @@ color:gray;
     box-shadow:0 18px 40px rgba(0,0,0,.20);
 }
 
-
-/* REMOVE OLD PSEUDO LAYERS */
-
-.banner::before,
-.banner::after{
+/* KEEP OLD IMAGE LAYER OFF */
+.banner::before{
     content:none !important;
 }
+
+/* BLUE OVERLAY — LEFT 30% */
+.banner::after{
+    content:"" !important;
+
+    position:absolute;
+    top:0;
+    left:0;
+    bottom:0;
+
+    width:30%;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(3,35,105,.98) 0%,
+            rgba(3,35,105,.90) 45%,
+            rgba(3,35,105,.45) 75%,
+            rgba(3,35,105,0) 100%
+        );
+
+    z-index:1;
+    pointer-events:none;
+}
+
 
 
 /* =========================
