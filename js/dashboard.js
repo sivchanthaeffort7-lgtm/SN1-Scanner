@@ -12,3 +12,6 @@ function scanMachine() {
 
     alert("កំពុងស្វែងរកម៉ាស៊ីន: " + machineNumber);
 }
+function toggleSidebar() {
+    document.querySelector('.sidebar').classList.toggle('collapsed');
+}
