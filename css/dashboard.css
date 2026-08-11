@@ -64,21 +64,26 @@ flex-direction:column;
 box-shadow:8px 0 25px rgba(0,0,0,.18);
 
 }
+
 .sidebar.collapsed{
     width:80px;
+    overflow:hidden;
+}
+
 .sidebar.collapsed li{
-    font-size:0;
+    width:45px;
+    overflow:hidden;
+    white-space:nowrap;
+    font-size:0 !important;
+    color:transparent !important;
 }
 
 .sidebar.collapsed li i{
-    font-size:18px;
+    font-size:18px !important;
+    color:white !important;
+    min-width:20px;
 }
-
-.sidebar.collapsed .logo h1,
-.sidebar.collapsed .logo p{
-    display:none;
-}
-}.logo{
+.logo{
     padding:25px 10px;
     text-align:left;
 
