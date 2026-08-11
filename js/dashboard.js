@@ -14,9 +14,4 @@ function scanMachine() {
 }
 function toggleSidebar() {
     document.querySelector('.sidebar').classList.toggle('collapsed');
-
-    const icon = document.querySelector('.menu-btn i');
-
-    icon.classList.toggle('fa-bars');
-    icon.classList.toggle('fa-xmark');
 }
