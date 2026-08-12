@@ -1129,15 +1129,19 @@ color:gray;
 
 @media (min-width: 769px) {
 
-  .dashboard-content {
-    position: relative;
+.main-content {
     margin-left: 260px;
     width: calc(100% - 260px);
-    padding: 20px 30px;
-    box-sizing: border-box;
     transition: margin-left 0.3s ease,
                 width 0.3s ease;
-  }
+}
+
+.dashboard-content {
+    position: relative;
+    width: 100%;
+    padding: 20px 30px;
+    box-sizing: border-box;
+}
 
   /* SIDEBAR OPEN */
   .sidebar {
@@ -1155,7 +1159,7 @@ color:gray;
     overflow: hidden;
   }
 
-  .sidebar.collapsed ~ .main-content .dashboard-content {
+  .sidebar.collapsed ~ .main-content {
     margin-left: 0;
     width: 100%;
   }
