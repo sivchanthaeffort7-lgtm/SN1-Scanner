@@ -1179,7 +1179,7 @@ color:gray;
 
   .top-right {
     position: absolute !important;
-    top: 15px;
+    top: 35px;
     right: 20px;
     z-index: 20;
   }
