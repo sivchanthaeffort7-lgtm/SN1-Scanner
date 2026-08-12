@@ -1141,7 +1141,7 @@ color:gray;
 .dashboard-content {
     position: relative;
     width: 100%;
-    padding: 20px 30px;
+    padding: 40px 50px;
     box-sizing: border-box;
 }
 
@@ -1173,14 +1173,14 @@ color:gray;
 
   .menu-btn {
     position: absolute !important;
-    top: -80px;
+    top: -110px;
     left: 10px;
     z-index: 20;
   }
 
   .top-right {
     position: absolute !important;
-    top: -80px;
+    top: -110px;
     right: 20px;
     z-index: 20;
   }
