@@ -1132,6 +1132,7 @@ color:gray;
 .main-content {
     margin-left: 260px;
     width: calc(100% - 260px);
+    box-sizing: border-box;
     transition: margin-left 0.3s ease,
                 width 0.3s ease;
 }
