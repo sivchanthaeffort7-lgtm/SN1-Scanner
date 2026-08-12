@@ -713,7 +713,7 @@ color:gray;
 
     width:52%;
 
-    padding-left:55px;
+    padding-left:40px;
     padding-right:25px;
 
     box-sizing:border-box;
@@ -731,12 +731,12 @@ color:gray;
 /* KHMER TITLE */
 
 .banner .left h2{
-    margin:0 0 12px 0;
+    margin: -8px 0 12px 0;
 
-    font-family:'Busra',serif;
+    font-family:'Busra', sans-serif;
     font-size:30px;
     line-height:1.30;
-    font-weight:400;
+    font-weight:500;
 
     color:#ffffff !important;
 
@@ -754,7 +754,7 @@ color:gray;
 
     max-width:520px;
 
-    font-family:'Busra',sans-serif;
+    font-family:'Busra', sans-serif;
     font-size:16px;
     line-height:1.7;
 
