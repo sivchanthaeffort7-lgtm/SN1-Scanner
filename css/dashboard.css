@@ -708,7 +708,7 @@ color:gray;
 
 .banner .left{
     position:relative;
-    left:-15px;
+    left:-25px;
 
     z-index:2;
 
@@ -734,7 +734,7 @@ color:gray;
     margin: -8px 0 12px 0;
 
     position:relative;
-    top:-15px;
+    top:-20px;
 
     font-family:'Busra',serif;
     font-size:40px;
