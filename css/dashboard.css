@@ -1155,7 +1155,7 @@ color:gray;
     overflow: hidden;
   }
 
-  .sidebar.collapsed ~ .main-content.dashboard-content {
+  .sidebar.collapsed ~ .main-content .dashboard-content {
     margin-left: 0;
     width: 100%;
   }
