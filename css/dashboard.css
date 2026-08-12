@@ -616,10 +616,12 @@ color:gray;
 .banner{
     position:relative;
     width:100%;
-    height:210px;
+    height:240px;
+    min-height:240px;
+    max-height:240px;
 
     margin-top:20px;
-    padding:0;
+    padding:30px 40px;
 
     border-radius:25px;
     overflow:hidden;
