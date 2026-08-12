@@ -625,7 +625,7 @@ color:gray;
     min-height:400px;
     max-height:400px;
 
-    margin-top:20px;
+    margin-top:-20px;
     padding:40px 50px;
 
     border-radius:25px;
