@@ -1141,7 +1141,7 @@ color:gray;
 .dashboard-content {
     position: relative;
     width: 100%;
-    top:-20px; 
+    top:-50px; 
     padding: 2px 12px;
     box-sizing: border-box;
 }
