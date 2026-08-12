@@ -723,8 +723,7 @@ color:gray;
     flex-direction:column;
     justify-content:flex-start;
     align-items:flex-start;
-    transform:translateY(-25px);
-
+    
     color:#ffffff;
 }
 
@@ -734,10 +733,10 @@ color:gray;
 .banner .left h2{
     margin: -8px 0 12px 0;
 
-    font-family:'Busra',sans-serif;
-    font-size:30px;
+    font-family:'Busra',serif;
+    font-size:50px;
     line-height:1.30;
-    font-weight:400;
+    font-weight:500;
 
     color:#ffffff !important;
 
@@ -755,8 +754,8 @@ color:gray;
 
     max-width:520px;
 
-    font-family:'Busra',sans-serif;
-    font-size:12px;
+    font-family:'Busra',serif;
+    font-size:20px;
     line-height:1.7;
 
     color:#ffffff !important;
