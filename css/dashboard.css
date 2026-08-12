@@ -616,8 +616,7 @@ color:gray;
 .banner{
     position:relative;
     width:100%;
-    height:auto;
-    aspect-ratio: 2 / 1;
+    height:210px;
 
     margin-top:20px;
     padding:0;
@@ -633,7 +632,7 @@ color:gray;
     background-image:url("../images/Juki.png");
     background-repeat:no-repeat;
     background-position:center right;
-    background-size:100% 100%;
+    background-size:auto 100%;
 
     box-shadow:0 18px 40px rgba(0,0,0,.20);
 }
