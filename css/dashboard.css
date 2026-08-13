@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap');
 @font-face {
   font-family: 'Busra';
   src: url('../fonts/Busra-Regular.woff2') format('woff2');
@@ -1148,7 +1149,7 @@ color:gray;
         left: 0 !important;
         top: 0 !important;
 
-        width: 500px !important;
+        width: 340px !important;
         height: 100vh !important;
         min-height: 100vh !important;
 
@@ -1176,46 +1177,76 @@ color:gray;
        ============================== */
 
     .main-content {
-        margin-left: 260px !important;
-       
-        width: 100% !important;
-        max-width: none !important;
+        margin-left: 0 !important;
+        width: 100vw !important;
+        max-width: 100vw !important;
         min-width: 0 !important;
 
-        min-height: 400vh !important;
+        min-height: 100vh !important;
         height: auto !important;
-      
 
         box-sizing: border-box;
 
-        overflow-x: auto !important;
+        overflow-x: hidden !important;
         overflow-y: visible !important;
+
+        font-family: 'Kantumruy Pro', sans-serif !important;
     }
 
-
-    /* ==============================
-       DASHBOARD CONTENT
-       ============================== */
 
     .dashboard-content {
-        position: relative !important;
-
-        width: 110% !important;
-        max-width: 110% !important;
-
+        width: 100% !important;
+        max-width: 100% !important;
         min-width: 0 !important;
 
-        top: -50px !important;
-
-        padding: 2px 12px !important;
+        height: auto !important;
+        min-height: 100vh !important;
 
         box-sizing: border-box;
 
-        overflow-x: auto !important;
+        padding: 0 12px !important;
+
+        overflow-x: hidden !important;
         overflow-y: visible !important;
+
+        font-family: 'Kantumruy Pro', sans-serif !important;
+    }
+
+/* ==============================
+       DASHBOARD CONTENT
+       ============================== */    
+    .dashboard-content h1 {
+        font-size: 28px !important;
+    }
+
+    .dashboard-content h2 {
+        font-size: 22px !important;
+    }
+
+    .dashboard-content h3 {
+        font-size: 18px !important;
+    }
+
+    .dashboard-content p {
+        font-size: 14px !important;
+        line-height: 1.6 !important;
     }
 
 
+    /* Banner text */
+    .banner-text h1 {
+        font-size: 32px !important;
+    }
+
+    .banner-text h2 {
+        font-size: 20px !important;
+    }
+
+    .banner-text p {
+        font-size: 14px !important;
+        line-height: 1.6 !important;
+    }
+}
     /* ==============================
        WHEN SIDEBAR CLOSED
        ============================== */
