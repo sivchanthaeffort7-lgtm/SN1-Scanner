@@ -1215,6 +1215,33 @@ color:gray;
     padding-right: 25px !important;
 
     box-sizing: border-box !important;
+} 
+/* MOBILE BANNER TEXT */
+
+.banner .left h2 {
+    font-size: 24px !important;
+    line-height: 1.15 !important;
+    top: 0 !important;
+    margin: 0 0 8px 0 !important;
+}
+
+.banner .left p {
+    font-size: 14px !important;
+    line-height: 1.3 !important;
+    margin: 0 0 10px 0 !important;
+} 
+/* MOBILE — BELL + PROFILE TO TOP LEFT */
+.top-right {
+    position: absolute !important;
+    top: 20px !important;
+    left: 20px !important;
+    right: auto !important;
+
+    z-index: 10000 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
 }  
 /* Menu button stays above everything */
     .menu-btn {
