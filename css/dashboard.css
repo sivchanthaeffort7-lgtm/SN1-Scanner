@@ -1249,7 +1249,7 @@ color:gray;
 
 .summary-cards {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    top: 20px !important;
+    top: 10px !important;
     width: 100% !important;
     gap: 8px !important;
     margin-top: 5px !important;
