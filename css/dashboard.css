@@ -1256,8 +1256,8 @@ color:gray;
 
 /* CARD */
 .summary-card {
-    width: 100% !important;
-    min-height: 100px !important;
+    width: 50% !important;
+    min-height: 50px !important;
     padding: 10px !important;
     gap: 10px !important;
     border-radius: 14px !important;
