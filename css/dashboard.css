@@ -1178,7 +1178,7 @@ color:gray;
     .main-content {
         margin-left: 260px !important;
        
-        width: 200% !important;
+        width: 110% !important;
         max-width: none !important;
         min-width: 0 !important;
 
@@ -1195,8 +1195,8 @@ color:gray;
     .dashboard-content {
         position: relative !important;
 
-        width: 200% !important;
-        max-width: 200% !important;
+        width: 110% !important;
+        max-width: 110% !important;
 
         min-width: 0 !important;
 
