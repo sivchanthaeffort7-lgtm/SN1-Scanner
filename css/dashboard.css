@@ -1348,8 +1348,8 @@ color:gray;
 /* DAILY SCAN - KEEP SIDEBAR LEFT */
 .main-content:has(.scan-box) {
     margin-left: 260px !important;
-    width: calc(100% - 260px) !important;
-    max-width: none !important;
+    width: 900px !important;
+    max-width: 900px !important;
 }  
 /* Menu button stays above everything */
     .menu-btn {
