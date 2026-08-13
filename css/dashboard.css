@@ -1252,15 +1252,17 @@ color:gray;
     width: 100% !important;
     gap: 8px !important;
     margin-top: 5px !important;
+    padding: 0 !important;
 }
 
 /* CARD */
 .summary-card {
     width: 100% !important;
     min-height: 30px !important;
-    padding: 10px !important;
-    gap: 10px !important;
+    padding: 10px 12px !important;
+    gap: 8px !important;
     border-radius: 14px !important;
+    box-sizing: border-box !important;
 }
 
 /* ICON */
@@ -1286,7 +1288,47 @@ color:gray;
 .summary-card span {
     font-size: 8px !important;
     line-height: 1.25 !important;
+} 
+/* MOBILE - QUICK ACTIONS : 1 CARD / ROW */
+
+.quick-actions {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    width: 100% !important;
+    gap: 10px !important;
+    margin-top: 12px !important;
+}
+
+.quick-card {
+    width: 100% !important;
+    min-height: 25px !important;
+    height: 25px !important;
+
+    padding: 10px 14px !important;
+
+    box-sizing: border-box !important;
+    border-radius: 14px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+}
+.quick-icon {
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+    font-size: 18px !important;
 }  
+.quick-text strong {
+    font-size: 14px !important;
+    line-height: 1.2 !important;
+}
+
+.quick-text span {
+    font-size: 10px !important;
+    line-height: 1.2 !important;
+}
+  
 /* MOBILE — BELL + PROFILE TO TOP LEFT */
 .top-right {
     position: absolute !important;
@@ -1299,7 +1341,8 @@ color:gray;
     display: flex !important;
     align-items: center !important;
     gap: 8px !important;
-}  
+} 
+  
 /* Menu button stays above everything */
     .menu-btn {
         position: absolute !important;
