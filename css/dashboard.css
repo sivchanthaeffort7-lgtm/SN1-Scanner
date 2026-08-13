@@ -1191,9 +1191,9 @@ color:gray;
 .banner {
     top: 80px !important;
     width: 100% !important;
-    height: 200px !important;
-    min-height: 200px !important;
-    max-height: 200px !important;
+    height: 400px !important;
+    min-height: 400px !important;
+    max-height: 400px !important;
 
     margin-top: 20px !important;
     padding: 30px 25px !important;
