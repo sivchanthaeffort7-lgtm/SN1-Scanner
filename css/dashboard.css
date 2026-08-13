@@ -1216,7 +1216,8 @@ color:gray;
     padding-right: 25px !important;
 
     box-sizing: border-box !important;
-}    /* Menu button stays above everything */
+} 
+/* Menu button stays above everything */
     .menu-btn {
         position: absolute !important;
         top: -100px !important;
