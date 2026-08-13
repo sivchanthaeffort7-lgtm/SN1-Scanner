@@ -1191,7 +1191,7 @@ color:gray;
     /* Menu button stays above everything */
     .menu-btn {
         position: absolute !important;
-        top: -50px !important;
+        top: -100px !important;
         left: auto !important;
         right: 0 !important;
 
