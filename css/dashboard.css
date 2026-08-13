@@ -1157,8 +1157,8 @@ color:gray;
 
         width: 200px !important;
         max-width: 52vw !important;
-        height: 90dvh !important;
-        min-height: 90dvh !important;
+        height: 100dvh !important;
+        min-height: 100dvh !important;
 
         z-index: 10000 !important;
 
