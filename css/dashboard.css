@@ -1214,28 +1214,37 @@ color:gray;
     padding-left: 25px !important;
     padding-right: 25px !important;
 
+    text-align: left !important;
+    align-items: flex-start !important;
     box-sizing: border-box !important;
 } 
 /* MOBILE BANNER TEXT */
 
 .banner .left h2 {
-    font-size: 10px !important;
+    font-size: 20px !important;
     line-height: 1.15 !important;
+    width: 100% !important;
     top: 0 !important;
-    left: 10 !important;
+    text-align: left !important;
     margin: 0 0 8px 0 !important;
 }
 
 .banner .left p {
-    font-size: 5px !important;
+    font-size: 10px !important;
     line-height: 1.15 !important;
     left: 10 !important;
+    text-align: left !important;
     margin: 0 0 10px 0 !important;
 } 
+.banner .left input {
+    width: 250px !important;
+    max-width: 75% !important;
+    height: 44px !important;
+}
 /* MOBILE — BELL + PROFILE TO TOP LEFT */
 .top-right {
     position: absolute !important;
-    top: -40px !important;
+    top: -50px !important;
     left: 0 !important;
     right: auto !important;
 
