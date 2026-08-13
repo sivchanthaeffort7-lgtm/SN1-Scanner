@@ -1121,3 +1121,52 @@ color:gray;
     gap: 12px;
   }
 }
+/* ================================
+   MOBILE ONLY
+   ================================ */
+
+@media (max-width: 768px) {
+
+    body {
+        font-family: "Busra Serif", serif;
+        font-size: 14px;
+    }
+
+    .sidebar {
+        font-family: "Busra Serif", serif;
+        font-size: 15px;
+    }
+
+    .sidebar li {
+        font-size: 15px;
+    }
+
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .dashboard-content {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .banner-text h1 {
+        font-size: 32px;
+    }
+
+    .banner-text h2 {
+        font-size: 20px;
+    }
+
+    .banner-text p {
+        font-size: 14px;
+        line-height: 1.7;
+    }
+
+    .summary-cards {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+}
