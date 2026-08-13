@@ -1148,7 +1148,7 @@ color:gray;
         left: 0 !important;
         top: 0 !important;
 
-        width: 300px !important;
+        width: 500px !important;
         height: 100vh !important;
         min-height: 100vh !important;
 
@@ -1178,11 +1178,11 @@ color:gray;
     .main-content {
         margin-left: 260px !important;
        
-        width: 110% !important;
+        width: 100% !important;
         max-width: none !important;
         min-width: 0 !important;
 
-        min-height: 100vh !important;
+        min-height: 400vh !important;
         height: auto !important;
       
 
