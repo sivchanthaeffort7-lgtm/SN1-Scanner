@@ -1126,15 +1126,15 @@ color:gray;
    MOBILE DASHBOARD - FINAL LOCK
    ========================================== */
 
-@media (max-width: 768px) {
-
-    html,
+html,
     body {
-        width: 100%;
-        min-width: 0;
-        max-width: 100%;
+        width: 100% !important;
+        min-width: 0 !important;
+        height: auto !important;
         overflow-x: hidden !important;
-        overflow-y: auto;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-y;
         font-family: 'Busra', serif;
     }
 
@@ -1177,21 +1177,14 @@ color:gray;
        MAIN CONTENT
        ============================== */
 
-    .main-content {
-        margin-left: 0 !important;
-        margin-right: 0!important;
-      
+     .main-content {
         width: 100% !important;
         max-width: 100% !important;
         min-width: 0 !important;
-
-        min-height: 100vh !important;
+        margin-left: 0 !important;
         height: auto !important;
-
-        box-sizing: border-box;
-
+        min-height: 100vh !important;
         overflow: visible !important;
-
         font-family: 'Kantumruy Pro', sans-serif !important;
     }
 
@@ -1200,17 +1193,10 @@ color:gray;
         width: 100% !important;
         max-width: 100% !important;
         min-width: 0 !important;
-
         height: auto !important;
         min-height: 100vh !important;
-
-        box-sizing: border-box !important;
-
         padding: 0 12px !important;
-
-        overflow-x: hidden !important;
-        overflow-y: visible !important;
-
+        overflow: visible !important;
         font-family: 'Kantumruy Pro', sans-serif !important;
     }
 
@@ -1267,25 +1253,29 @@ color:gray;
 
     .banner {
         width: 100% !important;
-        max-width: 100% !important;
+        height: 400px !important;
+        min-height: 400px !important;
+        max-height: 400px !important;
 
-        box-sizing: border-box;
-
+        box-sizing: border-box !important;
         overflow: hidden !important;
+
+        background-image: url("../images/Juki.png") !important;
+        background-repeat: no-repeat !important;
+        background-position: center right !important;
+        background-size: cover !important;
     }
-
-
     /* ==============================
        SUMMARY CARDS
        ============================== */
 
-    .summary-cards {
+     .summary-cards {
         width: 100% !important;
         max-width: 100% !important;
-
-        box-sizing: border-box;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 12px !important;
+        box-sizing: border-box !important;
     }
-
 
     /* ==============================
        MENU BUTTON
