@@ -1345,12 +1345,7 @@ color:gray;
     align-items: center !important;
     gap: 8px !important;
 } 
-/* DAILY SCAN - KEEP SIDEBAR LEFT */
-.main-content:has(.scan-box) {
-    margin-left: 260px !important;
-    width: 900px !important;
-    max-width: 900px !important;
-}  
+
 /* Menu button stays above everything */
     .menu-btn {
         position: absolute !important;
