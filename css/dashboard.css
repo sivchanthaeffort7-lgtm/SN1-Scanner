@@ -170,7 +170,11 @@ align-items:center;
 gap:15px;
 
 }
-
+.sidebar li span{
+    display:flex;
+    align-items:center;
+    line-height:1;
+}
 .sidebar li:hover{
 
 background:rgba(255,255,255,.15);
