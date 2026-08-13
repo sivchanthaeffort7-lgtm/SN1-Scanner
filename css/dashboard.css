@@ -1148,7 +1148,7 @@ color:gray;
         left: 0 !important;
         top: 0 !important;
 
-        width: 260px !important;
+        width: 300px !important;
         height: 100vh !important;
         min-height: 100vh !important;
 
@@ -1182,9 +1182,14 @@ color:gray;
         max-width: none !important;
         min-width: 0 !important;
 
+        min-height: 100vh !important;
+        height: auto !important;
+      
+
         box-sizing: border-box;
 
         overflow-x: auto !important;
+        overflow-y: visible !important;
     }
 
 
@@ -1207,6 +1212,7 @@ color:gray;
         box-sizing: border-box;
 
         overflow-x: auto !important;
+        overflow-y: visible !important;
     }
 
 
