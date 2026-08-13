@@ -1121,14 +1121,21 @@ color:gray;
     gap: 12px;
   }
 }
-/* ================================
-   MOBILE ONLY
-   ================================ */
+/* =================================
+   MOBILE = DESKTOP LAYOUT
+   ================================= */
 
 @media (max-width: 768px) {
 
     body {
+        min-width: 1024px;
         font-family: "Busra Serif", serif;
+    }
+
+    .main-content {
+        margin-left: 260px !important;
+        width: calc(100% - 260px) !important;
+        box-sizing: border-box;
     }
 
     .sidebar {
@@ -1140,32 +1147,8 @@ color:gray;
         z-index: 1000 !important;
     }
 
-    .main-content {
-        margin-left: 0 !important;
-        width: 100% !important;
-    }
-
     .dashboard-content {
         width: 100%;
-        padding: 10px;
         box-sizing: border-box;
-    }
-
-    .summary-cards {
-        grid-template-columns: 1fr;
-        gap: 10px;
-    }
-
-    .banner-text h1 {
-        font-size: 32px;
-    }
-
-    .banner-text h2 {
-        font-size: 20px;
-    }
-
-    .banner-text p {
-        font-size: 14px;
-        line-height: 1.7;
     }
 }
