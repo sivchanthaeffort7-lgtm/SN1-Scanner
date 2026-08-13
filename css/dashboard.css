@@ -1129,27 +1129,31 @@ color:gray;
 
     body {
         font-family: "Busra Serif", serif;
-        font-size: 14px;
     }
 
     .sidebar {
-        font-family: "Busra Serif", serif;
-        font-size: 15px;
-    }
-
-    .sidebar li {
-        font-size: 15px;
+        position: fixed !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 260px !important;
+        height: 100vh !important;
+        z-index: 1000 !important;
     }
 
     .main-content {
-        margin-left: 0;
-        width: 100%;
+        margin-left: 0 !important;
+        width: 100% !important;
     }
 
     .dashboard-content {
         width: 100%;
         padding: 10px;
         box-sizing: border-box;
+    }
+
+    .summary-cards {
+        grid-template-columns: 1fr;
+        gap: 10px;
     }
 
     .banner-text h1 {
@@ -1163,10 +1167,5 @@ color:gray;
     .banner-text p {
         font-size: 14px;
         line-height: 1.7;
-    }
-
-    .summary-cards {
-        grid-template-columns: 1fr;
-        gap: 10px;
     }
 }
