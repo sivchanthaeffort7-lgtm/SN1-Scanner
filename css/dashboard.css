@@ -1221,7 +1221,7 @@ color:gray;
 /* MOBILE BANNER TEXT */
 
 .banner .left h2 {
-    font-size: 20px !important;
+    font-size: 15px !important;
     line-height: 1.15 !important;
     width: 100% !important;
     top: 0 !important;
@@ -1237,9 +1237,9 @@ color:gray;
     margin: 0 0 10px 0 !important;
 } 
 .banner .left input {
-    width: 250px !important;
+    width: 100px !important;
     max-width: 75% !important;
-    height: 44px !important;
+    height: 12px !important;
 }
 /* MOBILE — BELL + PROFILE TO TOP LEFT */
 .top-right {
