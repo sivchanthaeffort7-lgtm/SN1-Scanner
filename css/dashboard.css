@@ -1187,8 +1187,36 @@ color:gray;
 
         box-sizing: border-box !important;
     }
+/* MOBILE BANNER */
+.banner {
+    top: 0 !important;
+    width: 100% !important;
+    height: 400px !important;
+    min-height: 400px !important;
+    max-height: 400px !important;
 
-    /* Menu button stays above everything */
+    margin-top: 20px !important;
+    padding: 30px 25px !important;
+
+    box-sizing: border-box !important;
+
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+
+    overflow: hidden !important;
+}
+
+/* Banner text */
+.banner .left {
+    left: 0 !important;
+    width: 100% !important;
+
+    padding-left: 25px !important;
+    padding-right: 25px !important;
+
+    box-sizing: border-box !important;
+}    /* Menu button stays above everything */
     .menu-btn {
         position: absolute !important;
         top: -100px !important;
