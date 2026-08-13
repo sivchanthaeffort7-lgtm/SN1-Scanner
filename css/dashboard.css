@@ -1121,3 +1121,68 @@ color:gray;
     gap: 12px;
   }
 }
+/* ==========================================
+   MOBILE - FOLLOW DESKTOP LAYOUT
+   ========================================== */
+
+@media (max-width: 768px) {
+
+    html,
+    body {
+        min-width: 1024px;
+        overflow-x: auto;
+        font-family: 'Busra', serif;
+    }
+
+    /* MAIN CONTENT */
+    .main-content {
+        margin-left: 260px !important;
+        width: calc(100% - 260px) !important;
+        box-sizing: border-box;
+    }
+
+    /* DASHBOARD CONTENT */
+    .dashboard-content {
+        position: relative !important;
+        width: 100% !important;
+        top: -50px !important;
+        padding: 2px 12px !important;
+        box-sizing: border-box;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+        position: fixed !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 260px !important;
+        height: 100vh !important;
+        z-index: 1000 !important;
+    }
+
+    /* SIDEBAR CLOSED */
+    .sidebar.collapsed {
+        width: 0 !important;
+        overflow: hidden !important;
+    }
+
+    /* MAIN CONTENT WHEN SIDEBAR CLOSED */
+    .sidebar.collapsed ~ .main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
+    }
+
+    /* MENU BUTTON */
+    .menu-btn {
+        position: fixed !important;
+        top: 20px !important;
+        left: 270px !important;
+        z-index: 2000 !important;
+    }
+
+    /* MENU BUTTON WHEN SIDEBAR CLOSED */
+    .sidebar.collapsed ~ .main-content .menu-btn {
+        left: 20px !important;
+    }
+
+}
