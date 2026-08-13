@@ -1207,7 +1207,6 @@ color:gray;
     overflow: hidden !important;
 }
 
-/* Banner text */
 .banner .left {
     left: 0 !important;
     width: 100% !important;
@@ -1216,7 +1215,7 @@ color:gray;
     padding-right: 25px !important;
 
     box-sizing: border-box !important;
-} 
+}  
 /* Menu button stays above everything */
     .menu-btn {
         position: absolute !important;
