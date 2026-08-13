@@ -1177,15 +1177,14 @@ color:gray;
 
     .main-content {
         margin-left: 260px !important;
-
-        width: calc(100vw - 260px) !important;
-        max-width: calc(100vw - 260px) !important;
-
+       
+        width: 200% !important;
+        max-width: none !important;
         min-width: 0 !important;
 
         box-sizing: border-box;
 
-        overflow-x: hidden !important;
+        overflow-x: auto !important;
     }
 
 
@@ -1196,8 +1195,8 @@ color:gray;
     .dashboard-content {
         position: relative !important;
 
-        width: 100% !important;
-        max-width: 100% !important;
+        width: 200% !important;
+        max-width: 200% !important;
 
         min-width: 0 !important;
 
@@ -1207,7 +1206,7 @@ color:gray;
 
         box-sizing: border-box;
 
-        overflow-x: hidden !important;
+        overflow-x: auto !important;
     }
 
 
