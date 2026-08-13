@@ -186,7 +186,17 @@ color:#0b57d0;
 font-weight:bold;
 
 }
+/* SIDEBAR ICON + TEXT ALIGNMENT */
+.sidebar li i {
+    width: 24px;
+    min-width: 24px;
+    text-align: center;
+    line-height: 1;
+}
 
+.sidebar li span {
+    line-height: 1.2;
+}
 /* Main */
 
 .main-content{
