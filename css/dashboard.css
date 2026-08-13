@@ -1149,7 +1149,7 @@ color:gray;
         left: 0 !important;
         top: 0 !important;
 
-        width: 340px !important;
+        width: 400px !important;
         height: 100vh !important;
         min-height: 100vh !important;
 
@@ -1157,6 +1157,7 @@ color:gray;
         overflow-x: hidden !important;
 
         z-index: 10000 !important;
+        font-family: 'Kantumruy Pro', sans-serif !important;
     }
 
 
@@ -1178,8 +1179,10 @@ color:gray;
 
     .main-content {
         margin-left: 0 !important;
-        width: 100vw !important;
-        max-width: 100vw !important;
+        margin-right: 0!important;
+      
+        width: 100% !important;
+        max-width: 100% !important;
         min-width: 0 !important;
 
         min-height: 100vh !important;
@@ -1187,8 +1190,7 @@ color:gray;
 
         box-sizing: border-box;
 
-        overflow-x: hidden !important;
-        overflow-y: visible !important;
+        overflow: visible !important;
 
         font-family: 'Kantumruy Pro', sans-serif !important;
     }
@@ -1202,7 +1204,7 @@ color:gray;
         height: auto !important;
         min-height: 100vh !important;
 
-        box-sizing: border-box;
+        box-sizing: border-box !important;
 
         padding: 0 12px !important;
 
