@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Create Month + Year Options
     // ------------------------------------------
 
-    for (let year = currentYear; year <= currentYear + 5; year++) {
+    for (let year = currentYear; year <= currentYear + 1; year++) {
 
         for (let month = 11; month >= 0; month--) {
 
@@ -60,3 +60,58 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 });
+// ==========================================
+// SN1 - MONTHLY COUNT STORAGE
+// ==========================================
+
+const MONTHLY_COUNT_STORAGE = "SN1_MONTHLY_COUNT_DATA";
+
+
+// ==========================================
+// GET MONTHLY DATA
+// ==========================================
+
+function getMonthlyCountData() {
+
+    const savedData = localStorage.getItem(MONTHLY_COUNT_STORAGE);
+
+    if (!savedData) {
+        return {};
+    }
+
+    try {
+        return JSON.parse(savedData);
+    } catch (error) {
+        console.error("Monthly Count data error:", error);
+        return {};
+    }
+}
+
+
+// ==========================================
+// SAVE MONTHLY DATA
+// ==========================================
+
+function saveMonthlyCountData(data) {
+
+    localStorage.setItem(
+        MONTHLY_COUNT_STORAGE,
+        JSON.stringify(data)
+    );
+}
+
+
+// ==========================================
+// GET CURRENT MONTH KEY
+// ==========================================
+
+function getSelectedMonthKey() {
+
+    const monthSelect = document.getElementById("countMonth");
+
+    if (!monthSelect) {
+        return null;
+    }
+
+    return monthSelect.value || null;
+}
