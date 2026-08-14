@@ -115,3 +115,115 @@ function getSelectedMonthKey() {
 
     return monthSelect.value || null;
 }
+// =====================================================
+// SN1 - MONTHLY COUNT CAMERA SCANNER
+// Scan QR → Get Machine ID only
+// =====================================================
+
+let monthlyScanner = null;
+
+function startMonthlyScanner() {
+
+    const scannerArea = document.getElementById("scannerArea");
+
+    if (!scannerArea) {
+        console.error("scannerArea not found");
+        return;
+    }
+
+    scannerArea.style.display = "block";
+
+    if (monthlyScanner) {
+        return;
+    }
+
+    monthlyScanner = new Html5Qrcode("scannerArea");
+
+    monthlyScanner.start(
+        { facingMode: "environment" },
+
+        {
+            fps: 10,
+            qrbox: {
+                width: 300,
+                height: 300
+            },
+            aspectRatio: 1.0
+        },
+
+        function(decodedText) {
+
+            const text = String(decodedText).trim();
+
+            // Get Machine ID only
+            const match = text.match(/\b[A-Z0-9]+\-\d+\b/i);
+
+            if (!match) {
+                return;
+            }
+
+            const machineID = match[0].toUpperCase();
+
+            // Show scanned ID immediately
+            addMonthlyScannedMachine(machineID);
+
+            stopMonthlyScanner();
+        },
+
+        function(errorMessage) {
+            // Ignore continuous scanning errors
+        }
+    ).catch(function(error) {
+
+        console.error("Monthly Camera error:", error);
+
+        monthlyScanner = null;
+        scannerArea.style.display = "none";
+    });
+}
+
+
+function stopMonthlyScanner() {
+
+    if (!monthlyScanner) {
+        document.getElementById("scannerArea").style.display = "none";
+        return;
+    }
+
+    monthlyScanner.stop()
+        .then(function() {
+
+            monthlyScanner.clear();
+            monthlyScanner = null;
+
+            document.getElementById("scannerArea").style.display = "none";
+        })
+        .catch(function() {
+
+            monthlyScanner = null;
+            document.getElementById("scannerArea").style.display = "none";
+        });
+}
+
+
+// =====================================================
+// Add scanned Machine ID to Monthly List
+// =====================================================
+
+function addMonthlyScannedMachine(machineID) {
+
+    const list = document.getElementById("scannedMachineList");
+
+    if (!list) {
+        console.error("scannedMachineList not found");
+        return;
+    }
+
+    const item = document.createElement("div");
+
+    item.textContent = machineID;
+
+    list.appendChild(item);
+
+    console.log("Monthly Count scanned:", machineID);
+}
