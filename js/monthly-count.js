@@ -222,46 +222,74 @@ function addMonthlyScannedMachine(machineID) {
     const monthKey = getSelectedMonthKey();
 
     if (!monthKey) {
-        alert("សូមជ្រើសរើសខែ និងឆ្នាំជាមុនសិន");
+        alert("សូមជ្រើសខែ និងឆ្នាំសិន");
         return;
     }
 
-    machineID = String(machineID).trim().toUpperCase();
+    // ==========================================
+    // GET SELECTED SCAN DATE
+    // ==========================================
+
+    const dateInput = document.getElementById("countDate1");
+
+    if (!dateInput || !dateInput.value) {
+        alert("សូមជ្រើសថ្ងៃស្កេនសិន");
+        return;
+    }
+
+    const scanDate = dateInput.value;
+
+    machineID = String(machineID)
+        .trim()
+        .toUpperCase();
 
     if (!machineID) {
         return;
     }
 
 
-    // =========================================
-    // GET ALL MONTHLY DATA
-    // =========================================
+    // ==========================================
+    // GET MONTHLY DATA
+    // ==========================================
 
     const data = getMonthlyCountData();
 
 
-    // =========================================
-    // CREATE SELECTED MONTH IF NOT EXISTS
-    // =========================================
+    // ==========================================
+    // CREATE MONTH IF NOT EXISTS
+    // ==========================================
 
     if (!data[monthKey]) {
 
         data[monthKey] = {
-            date1: "",
-            date2: "",
+            dateBlocks: {},
             machines: []
         };
-
     }
 
 
-    // =========================================
-    // PREVENT DUPLICATE MACHINE ID
-    // =========================================
+    // Make sure old data has machines array
+    if (!Array.isArray(data[monthKey].machines)) {
+        data[monthKey].machines = [];
+    }
+
+
+    // Make sure dateBlocks exists
+    if (!data[monthKey].dateBlocks) {
+        data[monthKey].dateBlocks = {};
+    }
+
+
+    // ==========================================
+    // 🔒 PREVENT DUPLICATE IN SAME MONTH
+    // ==========================================
 
     if (data[monthKey].machines.includes(machineID)) {
 
-        console.log("Machine already counted:", machineID);
+        console.log(
+            "Machine already counted this month:",
+            machineID
+        );
 
         renderMonthlyCount();
 
@@ -269,33 +297,58 @@ function addMonthlyScannedMachine(machineID) {
     }
 
 
-    // =========================================
-    // ADD MACHINE
-    // =========================================
+    // ==========================================
+    // CREATE SELECTED DATE BLOCK
+    // ==========================================
+
+    if (!data[monthKey].dateBlocks[scanDate]) {
+
+        data[monthKey].dateBlocks[scanDate] = {
+            machines: []
+        };
+    }
+
+
+    const dateBlock =
+        data[monthKey].dateBlocks[scanDate];
+
+
+    // ==========================================
+    // ADD MACHINE TO MONTH
+    // ==========================================
 
     data[monthKey].machines.push(machineID);
 
 
-    // =========================================
+    // ==========================================
+    // ADD MACHINE TO ACTUAL SCAN DATE
+    // ==========================================
+
+    dateBlock.machines.push(machineID);
+
+
+    // ==========================================
     // SAVE
-    // =========================================
+    // ==========================================
 
     saveMonthlyCountData(data);
 
 
-    // =========================================
+    // ==========================================
     // REFRESH DISPLAY
-    // =========================================
+    // ==========================================
 
     renderMonthlyCount();
 
 
     console.log(
-        "Monthly Count saved:",
+        "Monthly scan saved:",
         monthKey,
+        scanDate,
         machineID
     );
 }
+
 // =========================================================
 // SN1 - MONTHLY COUNT DISPLAY
 // =========================================================
@@ -304,21 +357,25 @@ function renderMonthlyCount() {
 
     const monthKey = getSelectedMonthKey();
 
-    const list = document.getElementById("scannedMachineList");
-    const scannedCount = document.getElementById("scannedCount");
-    const totalCount = document.getElementById("totalCount");
+    const list =
+        document.getElementById("scannedMachineList");
+
+    const scannedCount =
+        document.getElementById("scannedCount");
+
+    const totalCount =
+        document.getElementById("totalCount");
 
     if (!list) {
         return;
     }
 
-
-    // =========================================
-    // CLEAR CURRENT LIST
-    // =========================================
-
     list.innerHTML = "";
 
+
+    // ==========================================
+    // NO MONTH
+    // ==========================================
 
     if (!monthKey) {
 
@@ -334,16 +391,16 @@ function renderMonthlyCount() {
     }
 
 
-    // =========================================
-    // GET DATA FOR SELECTED MONTH ONLY
-    // =========================================
+    // ==========================================
+    // GET MONTH DATA
+    // ==========================================
 
     const data = getMonthlyCountData();
 
     const monthData = data[monthKey];
 
 
-    if (!monthData || !Array.isArray(monthData.machines)) {
+    if (!monthData) {
 
         if (scannedCount) {
             scannedCount.textContent = "0";
@@ -357,37 +414,193 @@ function renderMonthlyCount() {
     }
 
 
-    const machines = monthData.machines;
+    // ==========================================
+    // MONTHLY UNIQUE MACHINES
+    // ==========================================
+
+    const machines =
+        Array.isArray(monthData.machines)
+            ? monthData.machines
+            : [];
 
 
-    // =========================================
-    // DISPLAY MACHINE IDS
-    // =========================================
+    // ==========================================
+    // ① SUMMARY BY MACHINE TYPE
+    // ==========================================
+
+    const typeCounts = {};
+
 
     machines.forEach(function(machineID) {
 
-        const item = document.createElement("div");
+        const type = String(machineID)
+            .split("-")[0]
+            .trim()
+            .toUpperCase();
 
-        item.textContent = machineID;
+        if (!type) {
+            return;
+        }
 
-        list.appendChild(item);
+        if (!typeCounts[type]) {
+            typeCounts[type] = 0;
+        }
 
+        typeCounts[type]++;
     });
 
 
-    // =========================================
-    // UPDATE COUNTERS
-    // =========================================
+    // ==========================================
+    // DISPLAY TYPE SUMMARY
+    // ==========================================
+
+    const summaryContainer =
+        document.querySelector(".monthly-summary");
+
+
+    if (summaryContainer) {
+
+        let summaryHTML = "";
+
+        const types =
+            Object.keys(typeCounts).sort();
+
+
+        types.forEach(function(type) {
+
+            summaryHTML += `
+                <div class="summary-row">
+                    <span>${type}</span>
+                    <strong>${typeCounts[type]}</strong>
+                </div>
+            `;
+        });
+
+
+        // TOTAL
+        summaryHTML += `
+            <div class="summary-row summary-total">
+                <span>TOTAL</span>
+                <strong>${machines.length}</strong>
+            </div>
+        `;
+
+
+        summaryContainer.innerHTML =
+            summaryHTML;
+    }
+
+
+    // ==========================================
+    // ② DAILY DATE BLOCKS
+    // ==========================================
+
+    const dateBlocks =
+        monthData.dateBlocks || {};
+
+
+    const dates =
+        Object.keys(dateBlocks).sort();
+
+
+    dates.forEach(function(scanDate) {
+
+        const block =
+            dateBlocks[scanDate];
+
+
+        if (
+            !block ||
+            !Array.isArray(block.machines) ||
+            block.machines.length === 0
+        ) {
+            return;
+        }
+
+
+        // ======================================
+        // DATE BLOCK
+        // ======================================
+
+        const dateBlock =
+            document.createElement("div");
+
+        dateBlock.className =
+            "monthly-date-block";
+
+
+        // ======================================
+        // DATE HEADER
+        // ======================================
+
+        const dateHeader =
+            document.createElement("div");
+
+        dateHeader.className =
+            "monthly-date-header";
+
+
+        const date =
+            new Date(scanDate + "T00:00:00");
+
+
+        const formattedDate =
+            date.toLocaleDateString(
+                "en-GB",
+                {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric"
+                }
+            );
+
+     dateHeader.innerHTML = `
+            <span>📅 ${formattedDate}</span>
+            <strong>${block.machines.length}</strong>
+        `;
+
+
+        dateBlock.appendChild(dateHeader);
+
+
+        // ======================================
+        // MACHINE IDS
+        // ======================================
+
+        block.machines.forEach(function(machineID) {
+
+            const item =
+                document.createElement("div");
+
+            item.className =
+                "monthly-machine-item";
+
+            item.textContent =
+                machineID;
+
+            dateBlock.appendChild(item);
+        });
+
+
+        list.appendChild(dateBlock);
+    });
+
+
+    // ==========================================
+    // UPDATE MAIN COUNTERS
+    // ==========================================
 
     if (scannedCount) {
-        scannedCount.textContent = machines.length;
+        scannedCount.textContent =
+            machines.length;
     }
 
     if (totalCount) {
-        totalCount.textContent = machines.length;
+        totalCount.textContent =
+            machines.length;
     }
+}   
 
-}
 // =========================================================
 // MONTH CHANGE
 // =========================================================
