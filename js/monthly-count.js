@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Create Month + Year Options
     // ------------------------------------------
 
-    for (let year = currentYear; year >= currentYear - 1; year--) {
+    for (let year = currentYear; year = currentYear; year== currentYear; year++) {
 
         for (let month = 11; month >= 0; month--) {
 
