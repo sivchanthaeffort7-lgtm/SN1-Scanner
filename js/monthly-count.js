@@ -219,11 +219,292 @@ function addMonthlyScannedMachine(machineID) {
         return;
     }
 
-    const item = document.createElement("div");
+    const monthKey = getSelectedMonthKey();
 
-    item.textContent = machineID;
+    if (!monthKey) {
+        alert("សូមជ្រើសរើសខែ និងឆ្នាំជាមុនសិន");
+        return;
+    }
 
-    list.appendChild(item);
+    machineID = String(machineID).trim().toUpperCase();
 
-    console.log("Monthly Count scanned:", machineID);
+    if (!machineID) {
+        return;
+    }
+
+
+    // =========================================
+    // GET ALL MONTHLY DATA
+    // =========================================
+
+    const data = getMonthlyCountData();
+
+
+    // =========================================
+    // CREATE SELECTED MONTH IF NOT EXISTS
+    // =========================================
+
+    if (!data[monthKey]) {
+
+        data[monthKey] = {
+            date1: "",
+            date2: "",
+            machines: []
+        };
+
+    }
+
+
+    // =========================================
+    // PREVENT DUPLICATE MACHINE ID
+    // =========================================
+
+    if (data[monthKey].machines.includes(machineID)) {
+
+        console.log("Machine already counted:", machineID);
+
+        renderMonthlyCount();
+
+        return;
+    }
+
+
+    // =========================================
+    // ADD MACHINE
+    // =========================================
+
+    data[monthKey].machines.push(machineID);
+
+
+    // =========================================
+    // SAVE
+    // =========================================
+
+    saveMonthlyCountData(data);
+
+
+    // =========================================
+    // REFRESH DISPLAY
+    // =========================================
+
+    renderMonthlyCount();
+
+
+    console.log(
+        "Monthly Count saved:",
+        monthKey,
+        machineID
+    );
 }
+// =========================================================
+// SN1 - MONTHLY COUNT DISPLAY
+// =========================================================
+
+function renderMonthlyCount() {
+
+    const monthKey = getSelectedMonthKey();
+
+    const list = document.getElementById("scannedMachineList");
+    const scannedCount = document.getElementById("scannedCount");
+    const totalCount = document.getElementById("totalCount");
+
+    if (!list) {
+        return;
+    }
+
+
+    // =========================================
+    // CLEAR CURRENT LIST
+    // =========================================
+
+    list.innerHTML = "";
+
+
+    if (!monthKey) {
+
+        if (scannedCount) {
+            scannedCount.textContent = "0";
+        }
+
+        if (totalCount) {
+            totalCount.textContent = "0";
+        }
+
+        return;
+    }
+
+
+    // =========================================
+    // GET DATA FOR SELECTED MONTH ONLY
+    // =========================================
+
+    const data = getMonthlyCountData();
+
+    const monthData = data[monthKey];
+
+
+    if (!monthData || !Array.isArray(monthData.machines)) {
+
+        if (scannedCount) {
+            scannedCount.textContent = "0";
+        }
+
+        if (totalCount) {
+            totalCount.textContent = "0";
+        }
+
+        return;
+    }
+
+
+    const machines = monthData.machines;
+
+
+    // =========================================
+    // DISPLAY MACHINE IDS
+    // =========================================
+
+    machines.forEach(function(machineID) {
+
+        const item = document.createElement("div");
+
+        item.textContent = machineID;
+
+        list.appendChild(item);
+
+    });
+
+
+    // =========================================
+    // UPDATE COUNTERS
+    // =========================================
+
+    if (scannedCount) {
+        scannedCount.textContent = machines.length;
+    }
+
+    if (totalCount) {
+        totalCount.textContent = machines.length;
+    }
+
+}
+// =========================================================
+// MONTH CHANGE
+// =========================================================
+
+document.addEventListener("DOMContentLoaded", function() {
+
+    const monthSelect = document.getElementById("countMonth");
+
+    if (!monthSelect) {
+        return;
+    }
+
+    monthSelect.addEventListener("change", function() {
+
+        renderMonthlyCount();
+
+    });
+
+});
+
+// =========================================================
+// MONTHLY COUNT DATES
+// =========================================================
+
+document.addEventListener("DOMContentLoaded", function() {
+
+    const date1 = document.getElementById("countDate1");
+    const date2 = document.getElementById("countDate2");
+
+    if (!date1 || !date2) {
+        return;
+    }
+
+
+    function saveMonthlyDates() {
+
+        const monthKey = getSelectedMonthKey();
+
+        if (!monthKey) {
+            return;
+        }
+
+
+        const data = getMonthlyCountData();
+
+
+        if (!data[monthKey]) {
+
+            data[monthKey] = {
+                date1: "",
+                date2: "",
+                machines: []
+            };
+
+        }
+
+
+        data[monthKey].date1 = date1.value;
+        data[monthKey].date2 = date2.value;
+
+
+        saveMonthlyCountData(data);
+
+    }
+
+
+    date1.addEventListener("change", saveMonthlyDates);
+    date2.addEventListener("change", saveMonthlyDates);
+
+});
+
+// =========================================================
+// MACHINE SEARCH
+// =========================================================
+
+document.addEventListener("DOMContentLoaded", function() {
+
+    const searchInput = document.getElementById("machineSearch");
+
+    if (!searchInput) {
+        return;
+    }
+
+
+    searchInput.addEventListener("input", function() {
+
+        const keyword = searchInput.value
+            .trim()
+            .toUpperCase();
+
+
+        const items =
+            document.querySelectorAll(
+                "#scannedMachineList > div"
+            );
+
+
+        items.forEach(function(item) {
+
+            const machineID =
+                item.textContent
+                    .trim()
+                    .toUpperCase();
+
+
+            if (machineID.includes(keyword)) {
+
+                item.style.display = "";
+
+            } else {
+
+                item.style.display = "none";
+
+            }
+
+        });
+
+    });
+
+});
