@@ -23,7 +23,7 @@
 
     <div class="topbar">
 
-      <div class="menu-btn">
+      <div class="menu-btn" onclick="toggleSidebar()">
         <i class="fa-solid fa-bars"></i>
       </div>
 
@@ -58,8 +58,101 @@
           បើក Camera
         </button>
 
+  <!-- MONTHLY COUNT CONTROL -->
 
-        <!-- Scanned List will be added here later -->
+<div class="count-controls">
+
+    <div class="control-group">
+        <label for="countMonth">
+            <i class="fa-solid fa-calendar"></i>
+            ជ្រើសខែ
+        </label>
+
+        <select id="countMonth">
+            <option value="">ជ្រើសខែ</option>
+        </select>
+    </div>
+
+
+    <div class="count-dates">
+
+        <div class="control-group">
+            <label for="countDate1">
+                ថ្ងៃរាប់ទី 1
+            </label>
+
+            <input type="date" id="countDate1">
+        </div>
+
+
+        <div class="control-group">
+            <label for="countDate2">
+                ថ្ងៃរាប់ទី 2
+            </label>
+
+            <input type="date" id="countDate2">
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- MONTHLY SUMMARY -->
+
+<div class="monthly-summary">
+
+    <h2>
+        <i class="fa-solid fa-chart-simple"></i>
+        សរុបតាមប្រភេទ
+    </h2>
+
+    <div id="categorySummary">
+        <!-- Category counts will appear here -->
+    </div>
+
+    <div class="total-count">
+        <span>សរុបម៉ាស៊ីន</span>
+        <strong id="totalCount">0</strong>
+    </div>
+
+</div>
+
+
+<!-- SCANNED MACHINE IDS -->
+
+<div class="scanned-machines">
+
+    <div class="scanned-header">
+
+        <h2>
+            <i class="fa-solid fa-list-check"></i>
+            ម៉ាស៊ីនដែលបានស្កេន
+        </h2>
+
+        <span id="scannedCount">0</span>
+
+    </div>
+
+
+    <div class="search-machine">
+
+        <i class="fa-solid fa-magnifying-glass"></i>
+
+        <input
+            type="search"
+            id="machineSearch"
+            placeholder="ស្វែងរកលេខ ID ម៉ាស៊ីន..."
+        >
+
+    </div>
+
+
+    <div id="scannedMachineList">
+        <!-- Scanned machine IDs will appear here -->
+    </div>
+
+</div>        
 
       </section>
 
