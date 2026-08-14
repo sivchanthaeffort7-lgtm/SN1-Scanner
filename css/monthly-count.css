@@ -126,3 +126,219 @@ body {
         width: 100%;
     }
 }
+/* =========================================================
+   SN1 - MONTHLY COUNT
+   MONTH / DATE CONTROLS
+   ========================================================= */
+
+.count-controls {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.control-group label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.control-group label i {
+    margin-right: 6px;
+    color: #1565c0;
+}
+
+.control-group select,
+.control-group input[type="date"] {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1px solid #d0d7de;
+    border-radius: 8px;
+    background: #fff;
+    color: #333;
+    font-family: inherit;
+    font-size: 16px;
+    outline: none;
+    transition: 0.2s ease;
+}
+
+.control-group select:focus,
+.control-group input[type="date"]:focus {
+    border-color: #1565c0;
+    box-shadow: 0 0 0 3px rgba(21, 101, 192, 0.10);
+}
+
+.count-dates {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+
+/* =========================================================
+   MONTHLY SUMMARY
+   ========================================================= */
+
+.monthly-summary {
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.monthly-summary h2 {
+    margin: 0 0 20px;
+    font-size: 21px;
+    font-weight: 600;
+}
+
+.monthly-summary h2 i {
+    margin-right: 7px;
+    color: #1565c0;
+}
+
+#categorySummary {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.total-count {
+    margin-top: 18px;
+    padding: 18px;
+    border-radius: 10px;
+    background: #f5f7fa;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.total-count span {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.total-count strong {
+    font-size: 26px;
+    color: #1565c0;
+}
+
+
+/* =========================================================
+   SCANNED MACHINE LIST
+   ========================================================= */
+
+.scanned-machines {
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.scanned-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.scanned-header h2 {
+    margin: 0;
+    font-size: 21px;
+    font-weight: 600;
+}
+
+.scanned-header h2 i {
+    margin-right: 7px;
+    color: #1565c0;
+}
+
+#scannedCount {
+    min-width: 34px;
+    height: 34px;
+    padding: 0 10px;
+    border-radius: 17px;
+    background: #1565c0;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}
+
+
+/* SEARCH */
+
+.search-machine {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.search-machine i {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+}
+
+.search-machine input {
+    width: 100%;
+    padding: 12px 14px 12px 42px;
+    border: 1px solid #d0d7de;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 16px;
+    outline: none;
+}
+
+.search-machine input:focus {
+    border-color: #1565c0;
+    box-shadow: 0 0 0 3px rgba(21, 101, 192, 0.10);
+}
+
+
+/* MACHINE LIST */
+
+#scannedMachineList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#scannedMachineList > div {
+    padding: 13px 15px;
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .count-dates {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    #categorySummary {
+        grid-template-columns: 1fr;
+    }
+
+    .monthly-summary h2,
+    .scanned-header h2 {
+        font-size: 19px;
+    }
+
+}
