@@ -1,0 +1,124 @@
+/* ========================================
+   SN1 - MONTHLY COUNT
+   ======================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: inherit;
+    background: #f5f7fa;
+    color: #222;
+}
+
+
+/* MAIN PAGE */
+
+.monthly-count-page {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 30px;
+}
+
+
+/* PAGE TITLE */
+
+.monthly-count-page h1 {
+    margin: 0 0 10px;
+    font-size: 32px;
+}
+
+.monthly-count-page h1 i {
+    margin-right: 10px;
+    color: #1565c0;
+}
+
+.monthly-count-page > p {
+    margin: 0 0 30px;
+    font-size: 17px;
+    color: #666;
+}
+
+
+/* MAIN CARD */
+
+.count-card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.count-card h2 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 24px;
+}
+
+
+/* SCAN BUTTON */
+
+.scan-btn {
+    width: 100%;
+    max-width: 350px;
+
+    padding: 16px 20px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #1565c0;
+    color: white;
+
+    font-family: inherit;
+    font-size: 17px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.scan-btn i {
+    margin-right: 8px;
+}
+
+.scan-btn:hover {
+    background: #0d47a1;
+}
+
+
+/* ========================================
+   MOBILE
+   ======================================== */
+
+@media (max-width: 768px) {
+
+    .monthly-count-page {
+        padding: 30px 18px;
+    }
+
+    .monthly-count-page h1 {
+        font-size: 26px;
+    }
+
+    .monthly-count-page > p {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    .count-card {
+        padding: 22px;
+        border-radius: 16px;
+    }
+
+    .count-card h2 {
+        font-size: 21px;
+    }
+
+    .scan-btn {
+        max-width: none;
+        width: 100%;
+    }
+}
