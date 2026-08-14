@@ -51,10 +51,9 @@ document.addEventListener("DOMContentLoaded", function () {
             const monthNumber = String(month + 1).padStart(2, "0");
 
             // Example: 2026-08
-            option.value = ${year}-${monthNumber};
-
+            option.value = year + "-" + monthNumber;
             // Example: សីហា 2026
-            option.textContent = ${monthNames[month]} ${year};
+            option.textContent = monthNames[month] + " " + year;
 
             monthSelect.appendChild(option);
         }
