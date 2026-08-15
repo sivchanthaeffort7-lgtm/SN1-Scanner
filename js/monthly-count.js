@@ -333,7 +333,43 @@ function addMonthlyScannedMachine(machineID) {
 
     saveMonthlyCountData(data);
 
+// =========================
+// SAVE TO GOOGLE SHEET
+// =========================
 
+const API_URL = "ដាក់_API_URL_ដូចគ្នានឹង_Daily_Scan";
+
+fetch(API_URL, {
+  method: "POST",
+  headers: {
+    "Content-Type": "text/plain;charset=utf-8"
+  },
+  body: JSON.stringify({
+    action: "saveMonthlyCount",
+    machineID: machineID,
+    countDate: scanDate,
+    countedBy: localStorage.getItem("username") || ""
+  })
+})
+.then(response => response.json())
+.then(result => {
+
+  if (result.duplicate) {
+    console.log("Machine already counted in Google Sheet:", machineID);
+    return;
+  }
+
+  if (result.success) {
+    console.log("Monthly count saved to Google Sheet:", machineID);
+  } else {
+    console.error("Monthly count failed:", result.message);
+  }
+
+})
+.catch(error => {
+  console.error("Monthly Count API Error:", error);
+});
+    
     // ==========================================
     // REFRESH DISPLAY
     // ==========================================
