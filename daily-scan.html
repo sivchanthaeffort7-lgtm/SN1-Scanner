@@ -669,22 +669,19 @@ function loadScanHistory() {
 
             div.className = "history-item";
 
-            div.innerHTML = `
-                <div class="history-info">
+div.innerHTML = `
+    <div class="history-info">
 
-                    <div class="history-machine">
-                        ${item.machineID}
-                    </div>
+        <div class="history-machine">
+            ${item.machineID}
+        </div>
 
-                    <div class="history-detail">
-                        ${item.action}
-                        · ${item.username || "-"}
-                        · ${item.time}
-                    </div>
+        <div class="history-detail">
+            ${item.action} · ${item.time}
+        </div>
 
-                </div>
-            `;
-
+    </div>
+`;
             historyBox.appendChild(div);
 
         });
