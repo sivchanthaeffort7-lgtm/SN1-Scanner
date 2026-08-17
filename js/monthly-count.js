@@ -337,7 +337,7 @@ function addMonthlyScannedMachine(machineID) {
 // SAVE TO GOOGLE SHEET
 // =========================
 
-const API_URL = "ដាក់_API_URL_ដូចគ្នានឹង_Daily_Scan";
+const API_URL = "https://script.google.com/macros/s/AKfycbzDMYa0DttaLXrVscufwKhMNoJyNqORRL58EQzMmT0MB-UKQYR2IeRKA-qhnkaGG5Wt/exec";
 
 fetch(API_URL, {
   method: "POST",
