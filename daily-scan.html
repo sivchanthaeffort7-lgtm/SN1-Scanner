@@ -642,13 +642,13 @@ function loadScanHistory() {
 
         if (!data.success) {
 
-            historyBox.innerHTML =
-                '<div class="history-empty">' +
-                'មិនអាចទាញ Scan History បានទេ' +
-                '</div>';
+    historyBox.innerHTML =
+        '<div class="history-empty">' +
+        '❌ ' + (data.message || "មិនអាចទាញ Scan History បានទេ") +
+        '</div>';
 
-            return;
-        }
+    return;
+}
 
         if (!data.history || data.history.length === 0) {
 
