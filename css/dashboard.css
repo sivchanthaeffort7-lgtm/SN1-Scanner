@@ -1390,8 +1390,8 @@ color:gray;
 }
 /* PROFILE POSITION + NAME */
 .profile-box {
-    margin-top: 35px;
-    margin-bottom: 5px;
+    margin-top: 32px;
+    margin-bottom: 2px;
 }
 
 .profile-box > i {
