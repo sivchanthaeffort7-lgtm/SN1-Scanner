@@ -1360,3 +1360,31 @@ color:gray;
 /* ========================================
    MOBILE VERSION — END
    ======================================== */
+/* PROFILE NAME - SIDEBAR */
+.profile-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    margin: 0 12px 10px;
+    border-radius: 10px;
+    color: #fff;
+}
+
+.profile-box > i {
+    font-size: 20px;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.profile-info span {
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
