@@ -13,6 +13,14 @@
 
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
+<script>
+  const SN1User = localStorage.getItem("SN1User");
+
+  if (!SN1User) {
+    window.location.replace("login.html");
+  }
+</script>    
 </head>
 
 <body>
