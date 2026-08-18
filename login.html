@@ -423,7 +423,9 @@ const form=new FormData();
 form.append("action","login");
 form.append("username",username);
 form.append("password",password);
-
+  
+try{
+  
 const res=await fetch("https://script.google.com/macros/s/AKfycbzDMYa0DttaLXrVscufwKhMNoJyNqORRL58EQzMmT0MB-UKQYR2IeRKA-qhnkaGG5Wt/exec",{
 
 method:"POST",
@@ -445,7 +447,9 @@ window.location.href="index.html";
 
 }
 
-}
+} catch (error) {
+  alert("LOGIN ERROR: " + error.message);
+  }
 </script>
   
 <script src="js/login.js"></script>
