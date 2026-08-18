@@ -75,6 +75,16 @@
         </li>
 
     </ul>
+
+<div class="profile-box">
+  <i class="fa-solid fa-user"></i>
+
+  <div class="profile-info">
+    <span id="profileName">User</span>
+    <small>SN1 User</small>
+  </div>
+</div>
+
 <div class="logout-btn" onclick="logout()">
     <i class="fa-solid fa-right-from-bracket"></i>
     <span>ចាកចេញ</span>
@@ -270,6 +280,14 @@
 </div>
 
 <script src="js/dashboard.js"></script>
+
+<script>
+  const profileName = localStorage.getItem("SN1User");
+
+  if (profileName) {
+    document.getElementById("profileName").textContent = profileName;
+  }
+</script>
 
 </body>
 </html></div>
