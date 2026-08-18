@@ -348,7 +348,7 @@ fetch(API_URL, {
     action: "saveMonthlyCount",
     machineID: machineID,
     countDate: scanDate,
-    countedBy: localStorage.getItem("username") || ""
+    countedBy: localStorage.getItem("SN1User") || ""
   })
 })
 .then(response => response.json())
