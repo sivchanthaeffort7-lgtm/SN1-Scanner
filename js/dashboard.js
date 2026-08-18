@@ -15,3 +15,9 @@ function scanMachine() {
 function toggleSidebar() {
     document.querySelector('.sidebar').classList.toggle('collapsed');
 }
+function logout() {
+    localStorage.removeItem("SN1User");
+    localStorage.removeItem("username");
+
+    window.location.href = "login.html";
+}
