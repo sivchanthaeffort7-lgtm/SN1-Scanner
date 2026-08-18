@@ -543,13 +543,7 @@ async function renderMonthlyCount() {
 const sheetMonthData =
     buildMonthlyDataFromSheet(history, monthKey);
 
-const localData = getMonthlyCountData();
-
-const monthData =
-    history.length > 0
-        ? sheetMonthData
-        : localData[monthKey];
-
+const monthData = sheetMonthData;
     if (!monthData) {
 
         if (scannedCount) {
