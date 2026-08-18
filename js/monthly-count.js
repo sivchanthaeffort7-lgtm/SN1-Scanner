@@ -115,6 +115,45 @@ function getSelectedMonthKey() {
 
     return monthSelect.value || null;
 }
+// ==========================================
+// GET MONTHLY HISTORY FROM GOOGLE SHEET
+// ==========================================
+
+async function loadMonthlyHistoryFromSheet() {
+
+    try {
+
+        const form = new FormData();
+
+        form.append("action", "getMonthlyHistory");
+
+        const response = await fetch("/api", {
+            method: "POST",
+            body: form
+        });
+
+        const result = await response.json();
+
+        if (!result.success) {
+            console.error(
+                "Monthly History API Error:",
+                result.message
+            );
+            return [];
+        }
+
+        return result.history || [];
+
+    } catch (error) {
+
+        console.error(
+            "Monthly History Fetch Error:",
+            error
+        );
+
+        return [];
+    }
+}
 // =====================================================
 // SN1 - MONTHLY COUNT CAMERA SCANNER
 // Scan QR → Get Machine ID only
