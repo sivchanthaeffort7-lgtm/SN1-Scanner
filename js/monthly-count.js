@@ -154,6 +154,74 @@ async function loadMonthlyHistoryFromSheet() {
         return [];
     }
 }
+// ==========================================
+// BUILD MONTHLY DATA FROM GOOGLE SHEET
+// ==========================================
+
+function buildMonthlyDataFromSheet(history, monthKey) {
+
+    const monthData = {
+        machines: [],
+        dateBlocks: {}
+    };
+
+    history.forEach(function(item) {
+
+        let date = String(item.date || "").trim();
+
+        // Convert Google Sheet date to YYYY-MM-DD
+        if (date.includes("T")) {
+            date = date.substring(0, 10);
+        }
+
+        // Support DD/MM/YYYY
+        if (/^\d{2}\/\d{2}\/\d{4}$/.test(date)) {
+
+            const parts = date.split("/");
+
+            date =
+                parts[2] + "-" +
+                parts[1] + "-" +
+                parts[0];
+        }
+
+        // Only selected month
+        if (!date.startsWith(monthKey)) {
+            return;
+        }
+
+        const machineID =
+            String(item.machineID || "")
+                .trim()
+                .toUpperCase();
+
+        if (!machineID) {
+            return;
+        }
+
+        // Prevent duplicate display
+        if (!monthData.machines.includes(machineID)) {
+            monthData.machines.push(machineID);
+        }
+
+        // Create date block
+        if (!monthData.dateBlocks[date]) {
+
+            monthData.dateBlocks[date] = {
+                machines: []
+            };
+        }
+
+        if (
+            !monthData.dateBlocks[date].machines.includes(machineID)
+        ) {
+            monthData.dateBlocks[date].machines.push(machineID);
+        }
+
+    });
+
+    return monthData;
+}
 // =====================================================
 // SN1 - MONTHLY COUNT CAMERA SCANNER
 // Scan QR → Get Machine ID only
@@ -428,7 +496,7 @@ fetch(API_URL, {
 // SN1 - MONTHLY COUNT DISPLAY
 // =========================================================
 
-function renderMonthlyCount() {
+async function renderMonthlyCount() {
 
     const monthKey = getSelectedMonthKey();
 
@@ -470,10 +538,17 @@ function renderMonthlyCount() {
     // GET MONTH DATA
     // ==========================================
 
-    const data = getMonthlyCountData();
+    const history = await loadMonthlyHistoryFromSheet();
 
-    const monthData = data[monthKey];
+const sheetMonthData =
+    buildMonthlyDataFromSheet(history, monthKey);
 
+const localData = getMonthlyCountData();
+
+const monthData =
+    history.length > 0
+        ? sheetMonthData
+        : localData[monthKey];
 
     if (!monthData) {
 
