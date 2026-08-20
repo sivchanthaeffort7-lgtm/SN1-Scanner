@@ -452,7 +452,27 @@ window.location.href="index.html";
 </script>
   
 <script src="js/login.js"></script>
-  
+
+<script>
+  const angkorImages = [
+    "images/Angkor1.png",
+    "images/Angkor2.png",
+    "images/Angkor3.png",
+    "images/Angkor4.png",
+    "images/Angkor5.png",
+    "images/Angkor6.png",
+    "images/Angkor7.png",
+    "images/Angkor8.png",
+    "images/Angkor9.png",
+    "images/Angkor10.png"
+  ];
+
+  const randomImage =
+    angkorImages[Math.floor(Math.random() * angkorImages.length)];
+
+  document.body.style.backgroundImage =
+    'linear-gradient(rgba(8,20,45,.70), rgba(8,20,45,.75)), url("' + randomImage + '")';
+</script>  
 </body>
 
 </html>
