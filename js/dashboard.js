@@ -30,7 +30,7 @@ function logout() {
 
 async function loadDashboardData() {
     try {
-        const response = await fetch('/functions/dashboard');
+        const response = await fetch('/dashboard');
 
         if (!response.ok) {
             throw new Error('Dashboard API request failed');
