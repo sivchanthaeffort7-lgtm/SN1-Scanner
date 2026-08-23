@@ -4,7 +4,7 @@
 // DO NOT MODIFY QR SCANNER API
 // ============================================
 
-const DASHBOARD_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxpJ7ZfqMtqOW9B1Na6Bj4ah1kZU0KUBr_r3aD-upyAvSbTZB9pPlxZY7QvFtXSZgtT0w/exec";
+const DASHBOARD_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbygz-LJGLKQ7RiBcDiHVMyi7SLeGSO9cmNoozRSSP_egC1_EApPzfUTBePkB-Cd5gij9Q/exec";
 
 function corsHeaders() {
   return {
