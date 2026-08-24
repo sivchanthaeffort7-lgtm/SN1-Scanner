@@ -1,1 +1,1072 @@
+<!DOCTYPE html>
+<html lang="km">
 
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+  >
+
+  <title>Search Machine - SN1</title>
+
+  <!-- Noto Sans Khmer -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+Khmer:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+
+      font-family:
+        "Noto Sans Khmer",
+        Arial,
+        sans-serif;
+
+      background: #f4f7fb;
+      color: #1f2937;
+    }
+
+
+    /* =========================
+       PAGE
+    ========================= */
+
+    .page {
+      width: 100%;
+      max-width: 1200px;
+
+      margin: 0 auto;
+
+      padding: 32px 24px 50px;
+    }
+
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    .header {
+      margin-bottom: 24px;
+    }
+
+    .header h1 {
+      margin: 0 0 6px;
+
+      font-size: 28px;
+      font-weight: 700;
+
+      color: #123b7a;
+    }
+
+    .header p {
+      margin: 0;
+
+      font-size: 14px;
+      font-weight: 400;
+
+      color: #6b7280;
+    }
+
+
+    /* =========================
+       SEARCH BOX
+    ========================= */
+
+    .search-box {
+      display: flex;
+
+      width: 100%;
+
+      gap: 10px;
+
+      margin-bottom: 22px;
+    }
+
+    .search-box input {
+      flex: 1;
+
+      min-width: 0;
+
+      height: 52px;
+
+      padding: 0 17px;
+
+      border: 1px solid #d6dce5;
+      border-radius: 12px;
+
+      background: #ffffff;
+
+      font-family:
+        "Noto Sans Khmer",
+        Arial,
+        sans-serif;
+
+      font-size: 15px;
+
+      color: #1f2937;
+
+      outline: none;
+
+      transition: 0.2s;
+    }
+
+    .search-box input::placeholder {
+      color: #9ca3af;
+    }
+
+    .search-box input:focus {
+      border-color: #2563eb;
+
+      box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.10);
+    }
+
+
+    .search-box button {
+      height: 52px;
+
+      padding: 0 25px;
+
+      border: none;
+      border-radius: 12px;
+
+      background: #2563eb;
+
+      color: white;
+
+      font-family:
+        "Noto Sans Khmer",
+        Arial,
+        sans-serif;
+
+      font-size: 15px;
+      font-weight: 600;
+
+      cursor: pointer;
+
+      white-space: nowrap;
+
+      transition: 0.2s;
+    }
+
+    .search-box button:hover {
+      background: #1d4ed8;
+    }
+
+    .search-box button:active {
+      transform: scale(0.98);
+    }
+
+
+    /* =========================
+       MESSAGE
+    ========================= */
+
+    .message {
+      display: none;
+
+      padding: 13px 16px;
+
+      margin-bottom: 20px;
+
+      border-radius: 10px;
+
+      font-size: 14px;
+    }
+
+    .message.error {
+      display: block;
+
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .message.loading {
+      display: block;
+
+      background: #dbeafe;
+      color: #1e40af;
+    }
+
+
+    /* =========================
+       SECTION
+    ========================= */
+
+    .section {
+      background: #ffffff;
+
+      border-radius: 16px;
+
+      padding: 22px;
+
+      margin-bottom: 22px;
+
+      box-shadow:
+        0 2px 12px rgba(15, 23, 42, 0.05);
+
+      border: 1px solid #eef1f5;
+    }
+
+    .section h2 {
+      margin: 0 0 18px;
+
+      font-size: 19px;
+      font-weight: 700;
+
+      color: #1f2937;
+    }
+
+
+    /* =========================
+       MACHINE INFORMATION
+    ========================= */
+
+    .machine-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+      gap: 14px;
+    }
+
+    .machine-item {
+      min-width: 0;
+
+      padding: 15px;
+
+      background: #f8fafc;
+
+      border: 1px solid #edf0f4;
+
+      border-radius: 11px;
+    }
+
+    .machine-item .label {
+      margin-bottom: 5px;
+
+      font-size: 12px;
+      font-weight: 500;
+
+      color: #6b7280;
+
+      word-break: break-word;
+    }
+
+    .machine-item .value {
+      font-size: 15px;
+      font-weight: 600;
+
+      color: #111827;
+
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+
+/* =========================
+       HISTORY TABLE
+    ========================= */
+
+    .table-wrapper {
+      width: 100%;
+
+      overflow-x: auto;
+
+      -webkit-overflow-scrolling: touch;
+
+      border: 1px solid #e5e7eb;
+
+      border-radius: 10px;
+    }
+
+    table {
+      width: 100%;
+
+      min-width: 850px;
+
+      border-collapse: collapse;
+
+      background: white;
+    }
+
+    th {
+      padding: 12px 14px;
+
+      background: #1e40af;
+
+      color: white;
+
+      text-align: left;
+
+      font-size: 13px;
+      font-weight: 600;
+
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 12px 14px;
+
+      border-bottom: 1px solid #edf0f3;
+
+      color: #374151;
+
+      font-size: 13px;
+
+      white-space: nowrap;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr:hover td {
+      background: #f8fafc;
+    }
+
+
+    /* =========================
+       EMPTY
+    ========================= */
+
+    .empty {
+      padding: 30px 15px;
+
+      text-align: center;
+
+      color: #6b7280;
+
+      font-size: 14px;
+    }
+
+
+    /* ==================================================
+       TABLET
+    ================================================== */
+
+    @media (max-width: 900px) {
+
+      .page {
+        padding: 25px 18px 40px;
+      }
+
+      .machine-grid {
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+      }
+
+    }
+
+
+    /* ==================================================
+       PHONE
+    ================================================== */
+
+    @media (max-width: 600px) {
+
+      body {
+        background: #f5f7fb;
+      }
+
+
+      .page {
+        width: 100%;
+
+        padding:
+          20px 12px 35px;
+      }
+
+
+      /* Header */
+
+      .header {
+        margin-bottom: 18px;
+      }
+
+      .header h1 {
+        font-size: 22px;
+
+        line-height: 1.5;
+      }
+
+      .header p {
+        font-size: 12px;
+
+        line-height: 1.7;
+      }
+
+
+      /* Search */
+
+      .search-box {
+        flex-direction: column;
+
+        gap: 9px;
+
+        margin-bottom: 18px;
+      }
+
+      .search-box input {
+        width: 100%;
+
+        height: 50px;
+
+        font-size: 14px;
+
+        border-radius: 11px;
+      }
+
+      .search-box button {
+        width: 100%;
+
+        height: 50px;
+
+        font-size: 14px;
+
+        border-radius: 11px;
+      }
+
+
+      /* Section */
+
+      .section {
+        padding: 16px 13px;
+
+        border-radius: 13px;
+
+        margin-bottom: 16px;
+      }
+
+      .section h2 {
+        margin-bottom: 14px;
+
+        font-size: 17px;
+
+        line-height: 1.6;
+      }
+
+
+      /* Machine information */
+
+      .machine-grid {
+        grid-template-columns: 1fr;
+
+        gap: 9px;
+      }
+
+      .machine-item {
+        padding: 12px 13px;
+
+        border-radius: 10px;
+      }
+
+      .machine-item .label {
+        font-size: 11px;
+      }
+
+      .machine-item .value {
+        font-size: 14px;
+      }
+
+
+      /* History */
+
+      .table-wrapper {
+        margin-left: 0;
+        margin-right: 0;
+
+        border-radius: 9px;
+      }
+
+      table {
+        min-width: 780px;
+      }
+
+      th {
+        padding: 10px 11px;
+
+        font-size: 12px;
+      }
+
+      td {
+        padding: 10px 11px;
+
+        font-size: 12px;
+      }
+
+
+      .empty {
+        padding: 25px 10px;
+
+        font-size: 13px;
+      }
+
+
+      .message {
+        font-size: 13px;
+
+        line-height: 1.7;
+      }
+
+    }
+
+
+    /* ==================================================
+       SMALL PHONE
+    ================================================== */
+
+    @media (max-width: 380px) {
+
+      .page {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
+      .header h1 {
+        font-size: 20px;
+      }
+
+      .section {
+        padding: 14px 11px;
+      }
+
+      .section h2 {
+        font-size: 16px;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+  <div class="page">
+
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+      <h1>
+        🔍 ស្វែងរកម៉ាស៊ីន
+      </h1>
+
+      <p>
+        ស្វែងរកព័ត៌មានម៉ាស៊ីន និងប្រវត្តិការផ្លាស់ទីទាំងអស់
+      </p>
+
+    </div>
+
+
+    <!-- SEARCH -->
+
+<div class="search-box">
+
+      <input
+        type="text"
+        id="machineIdInput"
+        placeholder="បញ្ចូល Machine ID ឧ. SNL-0001"
+        autocomplete="off"
+      >
+
+      <button onclick="searchMachine()">
+        ស្វែងរក
+      </button>
+
+    </div>
+
+
+    <!-- MESSAGE -->
+
+    <div
+      id="message"
+      class="message"
+    ></div>
+
+
+    <!-- RESULT -->
+
+    <div
+      id="result"
+      style="display:none;"
+    >
+
+
+      <!-- CURRENT MACHINE -->
+
+      <div class="section">
+
+        <h2>
+          📋 ព័ត៌មានម៉ាស៊ីនបច្ចុប្បន្ន
+        </h2>
+
+        <div
+          id="machineInfo"
+          class="machine-grid"
+        ></div>
+
+      </div>
+
+
+      <!-- MOVEMENT HISTORY -->
+
+      <div class="section">
+
+        <h2>
+          📜 ប្រវត្តិការផ្លាស់ទីម៉ាស៊ីន
+        </h2>
+
+        <div id="historyContainer"></div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    const SEARCH_API_URL =
+      "/api/search-machine";
+
+
+    const input =
+      document.getElementById(
+        "machineIdInput"
+      );
+
+    const message =
+      document.getElementById(
+        "message"
+      );
+
+    const result =
+      document.getElementById(
+        "result"
+      );
+
+    const machineInfo =
+      document.getElementById(
+        "machineInfo"
+      );
+
+    const historyContainer =
+      document.getElementById(
+        "historyContainer"
+      );
+
+
+    /* =========================
+       ENTER TO SEARCH
+    ========================= */
+
+    input.addEventListener(
+      "keydown",
+      function(event) {
+
+        if (event.key === "Enter") {
+          searchMachine();
+        }
+
+      }
+    );
+
+
+    /* =========================
+       MESSAGE
+    ========================= */
+
+    function showMessage(
+      text,
+      type
+    ) {
+
+      message.textContent = text;
+
+      message.className =
+        "message " + type;
+
+    }
+
+
+    function clearMessage() {
+
+      message.textContent = "";
+
+      message.className =
+        "message";
+
+    }
+
+
+    /* =========================
+       SEARCH
+    ========================= */
+
+    async function searchMachine() {
+
+      const machineId =
+        input.value.trim();
+
+
+      if (!machineId) {
+
+        result.style.display =
+          "none";
+
+        showMessage(
+          "សូមបញ្ចូល Machine ID ជាមុនសិន។",
+          "error"
+        );
+
+        input.focus();
+
+        return;
+      }
+
+
+      result.style.display =
+        "none";
+
+
+      showMessage(
+        "កំពុងស្វែងរកម៉ាស៊ីន...",
+        "loading"
+      );
+
+
+      try {
+
+        const response =
+          await fetch(
+            SEARCH_API_URL +
+            "?id=" +
+            encodeURIComponent(
+              machineId
+            )
+          );
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            "Server error: " +
+            response.status
+          );
+
+        }
+
+
+        const data =
+          await response.json();
+
+
+        if (!data.success) {
+
+          throw new Error(
+            data.message ||
+            "Machine not found."
+          );
+
+        }
+
+
+        clearMessage();
+
+
+        displayMachine(
+          data.machine
+        );
+
+
+        displayHistory(
+          data.history
+        );
+
+
+        result.style.display =
+          "block";
+
+
+      } catch (error) {
+
+        result.style.display =
+          "none";
+
+        showMessage(
+          error.message ||
+          "មិនអាចស្វែងរកម៉ាស៊ីនបានទេ។",
+          "error"
+        );
+
+      }
+
+    }
+
+
+    /* =========================
+       MACHINE INFORMATION
+    ========================= */
+
+    function displayMachine(
+      machine
+    ) {
+
+      machineInfo.innerHTML = "";
+
+
+      const fields =
+        Object.entries(machine);
+
+
+      fields.forEach(
+        function([key, value]) {
+
+
+          const item =
+            document.createElement(
+              "div"
+            );
+
+
+          item.className =
+            "machine-item";
+
+
+          item.innerHTML = `
+
+            <div class="label">
+              ${escapeHtml(key)}
+            </div>
+
+            <div class="value">
+              ${escapeHtml(
+
+                formatValue(value)
+              )}
+            </div>
+
+          `;
+
+
+          machineInfo.appendChild(
+            item
+          );
+
+        }
+      );
+
+    }
+
+
+    /* =========================
+       HISTORY
+    ========================= */
+
+    function displayHistory(
+      history
+    ) {
+
+      historyContainer.innerHTML =
+        "";
+
+
+      if (
+        !history ||
+        history.length === 0
+      ) {
+
+        historyContainer.innerHTML = `
+
+          <div class="empty">
+
+            មិនមាន Movement History
+            សម្រាប់ម៉ាស៊ីននេះទេ។
+
+          </div>
+
+        `;
+
+        return;
+      }
+
+
+      const headers =
+        Object.keys(
+          history[0]
+        );
+
+
+      let tableHTML = `
+
+        <div class="table-wrapper">
+
+          <table>
+
+            <thead>
+
+              <tr>
+
+      `;
+
+
+      headers.forEach(
+        function(header) {
+
+          tableHTML += `
+
+            <th>
+              ${escapeHtml(header)}
+            </th>
+
+          `;
+
+        }
+      );
+
+
+      tableHTML += `
+
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+      `;
+
+
+      history.forEach(
+        function(record) {
+
+          tableHTML +=
+            "<tr>";
+
+
+          headers.forEach(
+            function(header) {
+
+              tableHTML += `
+
+                <td>
+                  ${escapeHtml(
+                    formatValue(
+                      record[header]
+                    )
+                  )}
+                </td>
+
+              `;
+
+            }
+          );
+
+
+          tableHTML +=
+            "</tr>";
+
+        }
+      );
+
+
+      tableHTML += `
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      `;
+
+
+      historyContainer.innerHTML =
+        tableHTML;
+
+    }
+
+
+    /* =========================
+       FORMAT
+    ========================= */
+
+    function formatValue(
+      value
+    ) {
+
+      if (
+        value === null ||
+        value === undefined ||
+        value === ""
+      ) {
+
+        return "-";
+
+      }
+
+      return String(value);
+
+    }
+
+
+    /* =========================
+       SECURITY
+    ========================= */
+
+    function escapeHtml(
+      value
+    ) {
+
+      return String(value)
+
+        .replace(
+          /&/g,
+          "&amp;"
+        )
+
+        .replace(
+          /</g,
+          "&lt;"
+        )
+
+        .replace(
+          />/g,
+          "&gt;"
+        )
+
+        .replace(
+          /"/g,
+          "&quot;"
+        )
+
+        .replace(
+          /'/g,
+          "&#039;"
+        );
+
+    }
+
+  </script>
+
+</body>
+
+</html>
