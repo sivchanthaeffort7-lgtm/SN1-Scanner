@@ -427,39 +427,183 @@
     setInterval(updateDateTime, 1000);
 
 
-    // ==============================
-    // FORM SUBMIT
-    // ==============================
+    // ==========================================
+// SUBMIT REPORT → SN1 DASHBOARD API
+// ==========================================
 
-    document
-      .getElementById("reportForm")
-      .addEventListener("submit", function(event) {
+const REPORT_API_URL =
+  "https://script.google.com/macros/s/AKfycbygz-LJGLKQ7RiBcDiHVMyi7SLeGSO9cmNoozRSSP_egC1_EApPzfUTBePkB-Cd5gij9Q/exec";
 
-        event.preventDefault();
 
-        const status =
-          document.getElementById("status");
+document
+  .getElementById("reportForm")
+  .addEventListener("submit", async function(event) {
 
-        status.className = "status success";
+    event.preventDefault();
+
+    const status =
+      document.getElementById("status");
+
+    const machineIds =
+      document.getElementById("machineIds").value
+        .split("\n")
+        .map(id => id.trim().toUpperCase())
+        .filter(id => id !== "");
+
+    // ==========================================
+    // VALIDATE MACHINE COUNT
+    // ==========================================
+
+    if (machineIds.length === 0) {
+
+      status.className = "status error";
+
+      status.textContent =
+        "សូមបញ្ចូលលេខសម្គាល់ម៉ាស៊ីនយ៉ាងហោចណាស់ 1 គ្រឿង។";
+
+      return;
+    }
+
+    if (machineIds.length > 20) {
+
+      status.className = "status error";
+
+      status.textContent =
+        "អាចបញ្ចូលបានអតិបរមា 20 ម៉ាស៊ីនក្នុងមួយរបាយការណ៍។";
+
+      return;
+    }
+
+
+    // ==========================================
+    // COLLECT FORM DATA
+    // ==========================================
+
+    const data = {
+
+      machineIds: machineIds,
+
+      action:
+        document.getElementById("action").value.trim(),
+
+      from:
+        document.getElementById("from").value.trim(),
+
+      to:
+        document.getElementById("to").value.trim(),
+
+      customer:
+        document.getElementById("customer").value.trim(),
+
+      reference:
+        document.getElementById("reference").value.trim(),
+
+      by:
+        document.getElementById("by").value.trim(),
+
+      remark:
+        document.getElementById("remark").value.trim()
+
+    };
+
+
+    // ==========================================
+    // SHOW SAVING STATUS
+    // ==========================================
+
+    status.className = "status";
+
+    status.style.display = "block";
+
+    status.textContent =
+      "កំពុងបញ្ចូលរបាយការណ៍...";
+
+
+    // ==========================================
+    // SEND TO GOOGLE APPS SCRIPT
+    // ==========================================
+
+    try {
+
+      const response = await fetch(
+        REPORT_API_URL,
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
+
+          body: JSON.stringify(data)
+        }
+      );
+
+
+      const result =
+        await response.json();
+
+
+      // ========================================
+      // SUCCESS
+      // ========================================
+
+      if (result.success) {
+
+        status.className =
+          "status success";
 
         status.textContent =
-          "បានទទួលរបាយការណ៍។ ត្រៀមភ្ជាប់ទៅ Movement_History...";
+          "✅ របាយការណ៍បានបញ្ចូលជោគជ័យ! " +
+          result.count +
+          " ម៉ាស៊ីនបានរក្សាទុកក្នុង Movement_History។";
 
-        /*
-          IMPORTANT:
+        document
+          .getElementById("reportForm")
+          .reset();
 
-          យើងមិនទាន់ភ្ជាប់ Google Apps Script
-          នៅជំហាននេះទេ។
+        document
+          .getElementById("machineCount")
+          .textContent =
+            "0 / 20 ម៉ាស៊ីន";
 
-          ជំហានបន្ទាប់យើងនឹងភ្ជាប់ form នេះ
-          ទៅ Movement_History ដោយផ្ទាល់។
+      }
 
-          ដូច្នេះ code ចាស់របស់
-          search-machine.html
-          មិនត្រូវបានប៉ះពាល់ទេ។
-        */
-      });
+      // ========================================
+      // ERROR
+      // ========================================
 
+      else {
+
+        status.className =
+          "status error";
+
+        status.textContent =
+          "❌ មិនអាចបញ្ចូលរបាយការណ៍បានទេ: " +
+          (result.error ||
+           result.message ||
+           "Unknown error");
+
+      }
+
+    }
+
+    catch (error) {
+
+      console.error(
+        "Report API Error:",
+        error
+      );
+
+      status.className =
+        "status error";
+
+      status.textContent =
+        "❌ មិនអាចភ្ជាប់ទៅ SN1 Dashboard API បានទេ។";
+
+    }
+
+});
 
     // ==============================
     // RESET
