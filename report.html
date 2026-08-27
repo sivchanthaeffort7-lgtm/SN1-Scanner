@@ -236,21 +236,23 @@
 
           <div class="grid">
 
-            <!-- Machine ID -->
-            <div class="field">
-              <label for="machineId">
-                Machine ID
-              </label>
+            <!-- Machine IDs -->
+<div class="field full">
+  <label for="machineIds">
+    លេខសម្គាល់ម៉ាស៊ីន
+  </label>
 
-              <input
-                type="text"
-                id="machineId"
-                name="machineId"
-                placeholder="ឧ. SN1-0001"
-                required
-              >
-            </div>
+  <textarea
+    id="machineIds"
+    name="machineIds"
+    placeholder="បញ្ចូលលេខសម្គាល់ម៉ាស៊ីនមួយក្នុងមួយបន្ទាត់&#10;ឧ.&#10;SN1-0001&#10;SN1-0002&#10;SN1-0003"
+    required
+  ></textarea>
 
+  <small id="machineCount" style="margin-top:7px; color:#6b7280;">
+    0 / 20 ម៉ាស៊ីន
+  </small>
+</div>
             <!-- Action -->
             <div class="field">
               <label for="action">
@@ -477,6 +479,43 @@
       status.textContent = "";
     }
 
+// ==============================
+// MACHINE ID LIMIT — MAX 20
+// ==============================
+
+const machineIdsInput =
+  document.getElementById("machineIds");
+
+const machineCount =
+  document.getElementById("machineCount");
+
+
+machineIdsInput.addEventListener("input", function () {
+
+  const lines = this.value
+    .split("\n")
+    .map(id => id.trim())
+    .filter(id => id !== "");
+
+  const count = lines.length;
+
+  machineCount.textContent =
+    count + " / 20 ម៉ាស៊ីន";
+
+  if (count > 20) {
+
+    machineCount.style.color = "#b91c1c";
+
+    machineCount.textContent =
+      "⚠️ លើសចំនួនកំណត់! អតិបរមា 20 ម៉ាស៊ីន";
+
+  } else {
+
+    machineCount.style.color = "#6b7280";
+
+  }
+
+});    
   </script>
 
 </body>
