@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Report - SN1</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, "Noto Sans Khmer", sans-serif;
+      background: #f5f7fb;
+      color: #1f2937;
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 30px;
+    }
+
+    .container {
+      max-width: 950px;
+      margin: 0 auto;
+    }
+
+    .header {
+      background: #0645ad;
+      color: white;
+      padding: 28px 30px;
+      border-radius: 18px 18px 0 0;
+    }
+
+    .header h1 {
+      margin: 0 0 6px;
+      font-size: 28px;
+    }
+
+    .header p {
+      margin: 0;
+      opacity: 0.9;
+      font-size: 14px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 0 0 18px 18px;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+    }
+
+    .section-title {
+      font-size: 19px;
+      font-weight: bold;
+      color: #0645ad;
+      margin-bottom: 22px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #374151;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      font-size: 15px;
+      outline: none;
+      background: white;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.10);
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .auto-info {
+      background: #f1f5ff;
+      border: 1px solid #dbe7ff;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 25px;
+    }
+
+    .auto-info strong {
+      color: #0645ad;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    button {
+      border: none;
+      border-radius: 10px;
+      padding: 13px 25px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .reset-btn {
+      background: #e5e7eb;
+      color: #374151;
+    }
+
+    .submit-btn {
+      background: #0645ad;
+      color: white;
+      min-width: 150px;
+    }
+
+    .submit-btn:hover {
+      background: #04388d;
+    }
+
+    .status {
+      margin-top: 20px;
+      padding: 13px 15px;
+      border-radius: 10px;
+      display: none;
+      font-size: 14px;
+    }
+
+    .status.success {
+      display: block;
+      background: #ecfdf5;
+      color: #047857;
+      border: 1px solid #a7f3d0;
+    }
+
+    .status.error {
+      display: block;
+      background: #fef2f2;
+      color: #b91c1c;
+      border: 1px solid #fecaca;
+    }
+
+    @media (max-width: 700px) {
+      .page {
+        padding: 15px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .field.full {
+        grid-column: auto;
+      }
+
+      .card {
+        padding: 20px;
+      }
+
+      .buttons {
+        flex-direction: column;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="page">
+
+    <div class="container">
+
+      <div class="header">
+        <h1>របាយការណ៍</h1>
+        <p>SN1 Warehouse Management System</p>
+      </div>
+
+      <div class="card">
+
+        <div class="section-title">
+          បញ្ចូលព័ត៌មានចលនាម៉ាស៊ីន
+        </div>
+
+        <div class="auto-info">
+          <div>
+            <strong>ថ្ងៃ / ម៉ោង:</strong>
+            <span id="currentDateTime">--</span>
+          </div>
+
+          <div style="margin-top:6px;">
+            <strong>អ្នកបញ្ចូល:</strong>
+            <span id="currentUser">SN1 User</span>
+          </div>
+        </div>
+
+        <form id="reportForm">
+
+          <div class="grid">
+
+            <!-- Machine ID -->
+            <div class="field">
+              <label for="machineId">
+                Machine ID
+              </label>
+
+              <input
+                type="text"
+                id="machineId"
+                name="machineId"
+                placeholder="ឧ. SN1-0002"
+                required
+              >
+            </div>
+
+            <!-- Action -->
+            <div class="field">
+              <label for="action">
+                Action
+              </label>
+
+              <select
+                id="action"
+                name="action"
+                required
+              >
+                <option value="">-- ជ្រើសរើស --</option>
+                <option value="Move">Move</option>
+                <option value="Return">Return</option>
+                <option value="Send">Send</option>
+                <option value="Receive">Receive</option>
+                <option value="Maintenance">Maintenance</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <!-- From -->
+            <div class="field">
+              <label for="from">
+                From
+              </label>
+
+              <input
+                type="text"
+                id="from"
+                name="from"
+                placeholder="ទីតាំងចេញ"
+              >
+            </div>
+
+            <!-- To -->
+            <div class="field">
+              <label for="to">
+                To
+              </label>
+
+              <input
+                type="text"
+                id="to"
+                name="to"
+                placeholder="ទីតាំងទៅ"
+              >
+            </div>
+
+            <!-- Customer -->
+            <div class="field">
+              <label for="customer">
+                Customer
+              </label>
+
+              <input
+                type="text"
+                id="customer"
+                name="customer"
+                placeholder="ឈ្មោះអតិថិជន"
+              >
+            </div>
+
+            <!-- Reference -->
+            <div class="field">
+              <label for="reference">
+                Reference
+              </label>
+
+              <input
+                type="text"
+                id="reference"
+                name="reference"
+                placeholder="ឧ. SN-15-0067"
+              >
+            </div>
+
+            <!-- By -->
+            <div class="field">
+              <label for="by">
+                By
+              </label>
+
+              <input
+                type="text"
+                id="by"
+                name="by"
+                placeholder="អ្នកធ្វើរបាយការណ៍"
+              >
+            </div>
+
+            <!-- Remark -->
+            <div class="field full">
+              <label for="remark">
+                Remark
+              </label>
+
+              <textarea
+                id="remark"
+                name="remark"
+                placeholder="បញ្ចូលកំណត់សម្គាល់..."
+              ></textarea>
+            </div>
+
+          </div>
+
+          <div class="buttons">
+
+            <button
+              type="button"
+              class="reset-btn"
+              onclick="resetReportForm()"
+            >
+              សម្អាត
+            </button>
+
+            <button
+              type="submit"
+              class="submit-btn"
+            >
+              បញ្ចូលរបាយការណ៍
+            </button>
+
+          </div>
+
+        </form>
+
+        <div id="status" class="status"></div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    // ==============================
+    // CURRENT DATE & TIME
+    // ==============================
+
+    function updateDateTime() {
+
+      const now = new Date();
+
+      const date = now.toLocaleDateString(
+        "en-GB",
+        {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric"
+        }
+      );
+
+      const time = now.toLocaleTimeString(
+        "en-GB",
+        {
+          hour: "2-digit",
+          minute: "2-digit"
+        }
+      );
+
+      document.getElementById(
+        "currentDateTime"
+      ).textContent = date + " " + time;
+    }
+
+
+    updateDateTime();
+
+    setInterval(updateDateTime, 1000);
+
+
+    // ==============================
+    // FORM SUBMIT
+    // ==============================
+
+    document
+      .getElementById("reportForm")
+      .addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        const status =
+          document.getElementById("status");
+
+        status.className = "status success";
+
+        status.textContent =
+          "បានទទួលរបាយការណ៍។ ត្រៀមភ្ជាប់ទៅ Movement_History...";
+
+        /*
+          IMPORTANT:
+
+          យើងមិនទាន់ភ្ជាប់ Google Apps Script
+          នៅជំហាននេះទេ។
+
+          ជំហានបន្ទាប់យើងនឹងភ្ជាប់ form នេះ
+          ទៅ Movement_History ដោយផ្ទាល់។
+
+          ដូច្នេះ code ចាស់របស់
+          search-machine.html
+          មិនត្រូវបានប៉ះពាល់ទេ។
+        */
+      });
+
+
+    // ==============================
+    // RESET
+    // ==============================
+
+    function resetReportForm() {
+
+      document
+        .getElementById("reportForm")
+        .reset();
+
+      const status =
+        document.getElementById("status");
+
+      status.className = "status";
+
+      status.textContent = "";
+    }
+
+  </script>
+
+</body>
+</html>
