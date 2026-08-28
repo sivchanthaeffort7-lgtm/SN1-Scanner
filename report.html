@@ -758,9 +758,7 @@ async function loadRecentReports() {
   const container =
     document.getElementById("recentReportsContent");
 
-  if (!container) {
-    return;
-  }
+  if (!container) return;
 
   container.innerHTML = `
     <div class="recent-report-empty">
@@ -770,22 +768,13 @@ async function loadRecentReports() {
 
   try {
 
-    // ========================================
-    // GET DATA FROM getRecentReports()
-    // ========================================
-
     const response = await fetch(
       REPORT_API_URL + "?report=recent"
     );
 
     const result = await response.json();
 
-    // ========================================
-    // CHECK API RESULT
-    // ========================================
-
     if (!result.success) {
-
       throw new Error(
         result.error ||
         result.message ||
@@ -793,24 +782,16 @@ async function loadRecentReports() {
       );
     }
 
-    // ========================================
-    // RAW REPORTS
-    // ========================================
-
     const reports =
       Array.isArray(result.reports)
         ? result.reports
         : [];
 
-    // ========================================
-    // DAILY SUMMARY
-    // ========================================
-
     const dailySummary =
       result.dailySummary || {};
 
     // ========================================
-    // NO REPORT
+    // NO DATA
     // ========================================
 
     if (reports.length === 0) {
@@ -825,15 +806,15 @@ async function loadRecentReports() {
     }
 
     // ========================================
-    // BUILD RAW TABLE
-    // SAME STRUCTURE AS MOVEMENT_HISTORY
+    // RAW MOVEMENT HISTORY
+    // ONE MACHINE = ONE ROW
     // ========================================
 
     let html = `
 
-      <div class="recent-reports-table-wrapper">
+      <div class="recent-report-table-wrap">
 
-        <table class="recent-reports-table">
+        <table class="recent-report-table">
 
           <thead>
             <tr>
@@ -853,11 +834,13 @@ async function loadRecentReports() {
           <tbody>
     `;
 
-    // ========================================
-    // RAW RECORD — ONE MACHINE = ONE ROW
-    // ========================================
 
     reports.forEach(function(report) {
+
+      /*
+       * getRecentReports() ពី Apps Script
+       * ប្រើ Header របស់ Movement_History
+       */
 
       const date =
         report["Date"] || "";
@@ -889,43 +872,40 @@ async function loadRecentReports() {
       const remark =
         report["Remark"] || "";
 
+
       html += `
 
         <tr>
 
-          <td>${escapeRecentReportHTML(date)}</td>
+          <td>${escapeReportValue(date)}</td>
 
-          <td>${escapeRecentReportHTML(time)}</td>
+          <td>${escapeReportValue(time)}</td>
 
-          <td>
-            <strong>
-              ${escapeRecentReportHTML(machineId)}
-            </strong>
+          <td class="machine-id">
+            ${escapeReportValue(machineId)}
           </td>
 
-          <td>${escapeRecentReportHTML(from)}</td>
+          <td>${escapeReportValue(from)}</td>
 
-          <td>${escapeRecentReportHTML(to)}</td>
+          <td>${escapeReportValue(to)}</td>
 
-          <td>${escapeRecentReportHTML(customer)}</td>
+          <td>${escapeReportValue(customer)}</td>
 
-          <td>
-            <span class="recent-action">
-              ${escapeRecentReportHTML(action)}
-            </span>
+          <td class="action-cell">
+            ${escapeReportValue(action)}
           </td>
 
-          <td>${escapeRecentReportHTML(reference)}</td>
+          <td>${escapeReportValue(reference)}</td>
 
-          <td>${escapeRecentReportHTML(by)}</td>
+          <td>${escapeReportValue(by)}</td>
 
-          <td>${escapeRecentReportHTML(remark)}</td>
+          <td>${escapeReportValue(remark)}</td>
 
         </tr>
 
       `;
-
     });
+
 
     html += `
 
@@ -939,14 +919,14 @@ async function loadRecentReports() {
 
 
     // ========================================
-    // DAILY SUMMARY
-    // TOTAL MACHINES BY ACTION / DATE
+    // DAILY ACTION SUMMARY
     // ========================================
 
-    const summaryDates =
+    const dates =
       Object.keys(dailySummary);
 
-    if (summaryDates.length > 0) {
+
+    if (dates.length > 0) {
 
       html += `
 
@@ -956,14 +936,12 @@ async function loadRecentReports() {
             សរុបចំនួនម៉ាស៊ីនតាមសកម្មភាព
           </div>
 
-          <div class="daily-summary-table-wrapper">
+          <div class="daily-summary-table-wrap">
 
             <table class="daily-summary-table">
 
               <thead>
-
                 <tr>
-
                   <th>Date</th>
                   <th>ជួល</th>
                   <th>ដកត្រឡប់</th>
@@ -971,23 +949,37 @@ async function loadRecentReports() {
                   <th>ប្ដូរចូល</th>
                   <th>លក់ចេញ</th>
                   <th>ជួសជុល</th>
-
                 </tr>
-
               </thead>
 
               <tbody>
       `;
 
 
-      // ========================================
-      // NEWEST DATE FIRST
-      // ========================================
+      // Newest date first
+      dates.sort(function(a, b) {
 
-      summaryDates.reverse();
+        const pa = a.split("/");
+        const pb = b.split("/");
+
+        const da = new Date(
+          Number(pa[2]),
+          Number(pa[1]) - 1,
+          Number(pa[0])
+        );
+
+        const db = new Date(
+          Number(pb[2]),
+          Number(pb[1]) - 1,
+          Number(pb[0])
+        );
+
+        return db - da;
+
+      });
 
 
-      summaryDates.forEach(function(date) {
+      dates.forEach(function(date) {
 
         const summary =
           dailySummary[date] || {};
@@ -996,23 +988,33 @@ async function loadRecentReports() {
 
           <tr>
 
-            <td>
-              <strong>
-                ${escapeRecentReportHTML(date)}
-              </strong>
+            <td class="summary-date">
+              ${escapeReportValue(date)}
             </td>
 
-            <td>${summary["ជួល"] || 0}</td>
+            <td>
+              ${summary["ជួល"] || 0}
+            </td>
 
-            <td>${summary["ដកត្រឡប់"] || 0}</td>
+            <td>
+              ${summary["ដកត្រឡប់"] || 0}
+            </td>
 
-            <td>${summary["ប្ដូរចេញ"] || 0}</td>
+            <td>
+              ${summary["ប្ដូរចេញ"] || 0}
+            </td>
 
-            <td>${summary["ប្ដូរចូល"] || 0}</td>
+            <td>
+              ${summary["ប្ដូរចូល"] || 0}
+            </td>
 
-            <td>${summary["លក់ចេញ"] || 0}</td>
+            <td>
+              ${summary["លក់ចេញ"] || 0}
+            </td>
 
-            <td>${summary["ជួសជុល"] || 0}</td>
+            <td>
+              ${summary["ជួសជុល"] || 0}
+            </td>
 
           </tr>
 
@@ -1032,7 +1034,6 @@ async function loadRecentReports() {
         </div>
 
       `;
-
     }
 
 
@@ -1051,35 +1052,28 @@ async function loadRecentReports() {
     );
 
     container.innerHTML = `
-
       <div class="recent-report-empty">
-
         ❌ មិនអាចទាញយករបាយការណ៍បានទេ។
-
       </div>
-
     `;
-
   }
-
 }
 
 
 // ==========================================
-// ESCAPE HTML
-// PREVENT RAW DATA BREAKING THE TABLE
+// ESCAPE HTML VALUE
 // ==========================================
 
-function escapeRecentReportHTML(value) {
+function escapeReportValue(value) {
 
-  return String(value)
+  return String(value || "")
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
 
-}
+}    
 // ==========================================
 // LOAD RECENT REPORTS WHEN PAGE OPENS
 // ==========================================
