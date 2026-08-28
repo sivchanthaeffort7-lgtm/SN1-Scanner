@@ -782,17 +782,14 @@ async function loadRecentReports() {
       );
     }
 
+    // ======================================
+    // RAW DATA FROM MOVEMENT_HISTORY
+    // ======================================
+
     const reports =
       Array.isArray(result.reports)
         ? result.reports
         : [];
-
-    const dailySummary =
-      result.dailySummary || {};
-
-    // ========================================
-    // NO DATA
-    // ========================================
 
     if (reports.length === 0) {
 
@@ -805,244 +802,246 @@ async function loadRecentReports() {
       return;
     }
 
-    // ========================================
-    // RAW MOVEMENT HISTORY
-    // ONE MACHINE = ONE ROW
-    // ========================================
+    // ======================================
+    // GROUP RAW DATA BY DATE
+    // ======================================
 
-    let html = `
+    const grouped = {};
 
-      <div class="recent-report-table-wrap">
-
-        <table class="recent-report-table">
-
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Time</th>
-              <th>Machine ID</th>
-              <th>From</th>
-              <th>To</th>
-              <th>Customer</th>
-              <th>Action</th>
-              <th>Reference</th>
-              <th>By</th>
-              <th>Remark</th>
-            </tr>
-          </thead>
-
-          <tbody>
-    `;
-
-
-    reports.forEach(function(report) {
-
-      /*
-       * getRecentReports() ពី Apps Script
-       * ប្រើ Header របស់ Movement_History
-       */
+    reports.forEach(report => {
 
       const date =
-        report["Date"] || "";
+        report["Date"] || "-";
 
-      const time =
-        report["Time"] || "";
+      if (!grouped[date]) {
+        grouped[date] = [];
+      }
 
-      const machineId =
-        report["Machine ID"] || "";
+      grouped[date].push(report);
 
-      const from =
-        report["From"] || "";
-
-      const to =
-        report["To"] || "";
-
-      const customer =
-        report["Customer"] || "";
-
-      const action =
-        report["Action"] || "";
-
-      const reference =
-        report["Reference"] || "";
-
-      const by =
-        report["By"] || "";
-
-      const remark =
-        report["Remark"] || "";
-
-
-      html += `
-
-        <tr>
-
-          <td>${escapeReportValue(date)}</td>
-
-          <td>${escapeReportValue(time)}</td>
-
-          <td class="machine-id">
-            ${escapeReportValue(machineId)}
-          </td>
-
-          <td>${escapeReportValue(from)}</td>
-
-          <td>${escapeReportValue(to)}</td>
-
-          <td>${escapeReportValue(customer)}</td>
-
-          <td class="action-cell">
-            ${escapeReportValue(action)}
-          </td>
-
-          <td>${escapeReportValue(reference)}</td>
-
-          <td>${escapeReportValue(by)}</td>
-
-          <td>${escapeReportValue(remark)}</td>
-
-        </tr>
-
-      `;
     });
 
+    // ======================================
+    // CLEAR
+    // ======================================
 
-    html += `
+    container.innerHTML = "";
 
-          </tbody>
+    // ======================================
+    // DISPLAY BY DATE
+    // ======================================
 
-        </table>
+    Object.keys(grouped).forEach(date => {
 
-      </div>
+      const dayReports = grouped[date];
 
-    `;
+      // ------------------------------------
+      // DAILY SECTION
+      // ------------------------------------
 
+      const section =
+        document.createElement("div");
 
-    // ========================================
-    // DAILY ACTION SUMMARY
-    // ========================================
+      section.className =
+        "recent-report-card";
 
-    const dates =
-      Object.keys(dailySummary);
+      // ------------------------------------
+      // COUNT MACHINE BY ACTION
+      // ------------------------------------
 
+      const actionCount = {};
 
-    if (dates.length > 0) {
+      dayReports.forEach(report => {
 
-      html += `
+        const action =
+          report["Action"] || "មិនបានកំណត់";
 
-        <div class="daily-summary">
+        if (!actionCount[action]) {
+          actionCount[action] = 0;
+        }
 
-          <div class="daily-summary-title">
-            សរុបចំនួនម៉ាស៊ីនតាមសកម្មភាព
-          </div>
-
-          <div class="daily-summary-table-wrap">
-
-            <table class="daily-summary-table">
-
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>ជួល</th>
-                  <th>ដកត្រឡប់</th>
-                  <th>ប្ដូរចេញ</th>
-                  <th>ប្ដូរចូល</th>
-                  <th>លក់ចេញ</th>
-                  <th>ជួសជុល</th>
-                </tr>
-              </thead>
-
-              <tbody>
-      `;
-
-
-      // Newest date first
-      dates.sort(function(a, b) {
-
-        const pa = a.split("/");
-        const pb = b.split("/");
-
-        const da = new Date(
-          Number(pa[2]),
-          Number(pa[1]) - 1,
-          Number(pa[0])
-        );
-
-        const db = new Date(
-          Number(pb[2]),
-          Number(pb[1]) - 1,
-          Number(pb[0])
-        );
-
-        return db - da;
+        actionCount[action]++;
 
       });
 
+      // ------------------------------------
+      // ACTION SUMMARY
+      // ------------------------------------
 
-      dates.forEach(function(date) {
+      let summaryHTML = "";
 
-        const summary =
-          dailySummary[date] || {};
+      Object.keys(actionCount).forEach(action => {
 
-        html += `
+        summaryHTML += `
+          <div style="
+            display:flex;
+            justify-content:space-between;
+            padding:6px 0;
+            border-bottom:1px solid #eef1f5;
+          ">
+            <span>${action}</span>
 
-          <tr>
-
-            <td class="summary-date">
-              ${escapeReportValue(date)}
-            </td>
-
-            <td>
-              ${summary["ជួល"] || 0}
-            </td>
-
-            <td>
-              ${summary["ដកត្រឡប់"] || 0}
-            </td>
-
-            <td>
-              ${summary["ប្ដូរចេញ"] || 0}
-            </td>
-
-            <td>
-              ${summary["ប្ដូរចូល"] || 0}
-            </td>
-
-            <td>
-              ${summary["លក់ចេញ"] || 0}
-            </td>
-
-            <td>
-              ${summary["ជួសជុល"] || 0}
-            </td>
-
-          </tr>
-
+            <strong>
+              ${actionCount[action]} ម៉ាស៊ីន
+            </strong>
+          </div>
         `;
 
       });
 
+      // ------------------------------------
+      // RAW TABLE
+      // ------------------------------------
 
-      html += `
+      let rowsHTML = "";
 
-              </tbody>
+      dayReports.forEach(report => {
 
-            </table>
+        const time =
+          report["Time"] || "-";
 
+        const machineId =
+          report["Machine ID"] || "-";
+
+        const from =
+          report["From"] || "-";
+
+        const to =
+          report["To"] || "-";
+
+        const customer =
+          report["Customer"] || "-";
+
+        const action =
+          report["Action"] || "-";
+
+        const reference =
+          report["Reference"] || "-";
+
+        const by =
+          report["By"] || "-";
+
+        const remark =
+          report["Remark"] || "-";
+
+        rowsHTML += `
+          <tr>
+
+            <td>${date}</td>
+
+            <td>${time}</td>
+
+            <td>
+              <strong>${machineId}</strong>
+            </td>
+
+            <td>${from}</td>
+
+            <td>${to}</td>
+
+            <td>${customer}</td>
+
+            <td>${action}</td>
+
+            <td>${reference}</td>
+
+            <td>${by}</td>
+
+            <td>${remark}</td>
+
+          </tr>
+        `;
+
+      });
+
+      // ------------------------------------
+      // SECTION HTML
+      // ------------------------------------
+
+      section.innerHTML = `
+
+        <div style="
+          font-size:17px;
+          font-weight:700;
+          color:#0645ad;
+          margin-bottom:15px;
+        ">
+          📅 ${date}
+        </div>
+
+
+        <!-- DAILY SUMMARY -->
+
+        <div style="
+          background:#f8fafc;
+          border:1px solid #e5e7eb;
+          border-radius:10px;
+          padding:12px 15px;
+          margin-bottom:18px;
+        ">
+
+          <div style="
+            font-weight:700;
+            margin-bottom:8px;
+          ">
+            សរុបចំនួនម៉ាស៊ីនតាម Action
           </div>
+
+          ${summaryHTML}
+
+        </div>
+
+
+        <!-- RAW MOVEMENT HISTORY -->
+
+        <div style="
+          overflow-x:auto;
+        ">
+
+          <table style="
+            width:100%;
+            border-collapse:collapse;
+            font-size:13px;
+            white-space:nowrap;
+          ">
+
+            <thead>
+
+              <tr style="
+                background:#0645ad;
+                color:white;
+              ">
+
+                <th style="padding:9px;">Date</th>
+                <th style="padding:9px;">Time</th>
+                <th style="padding:9px;">Machine ID</th>
+                <th style="padding:9px;">From</th>
+                <th style="padding:9px;">To</th>
+                <th style="padding:9px;">Customer</th>
+                <th style="padding:9px;">Action</th>
+                <th style="padding:9px;">Reference</th>
+                <th style="padding:9px;">By</th>
+                <th style="padding:9px;">Remark</th>
+
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              ${rowsHTML}
+
+            </tbody>
+
+          </table>
 
         </div>
 
       `;
-    }
 
+      container.appendChild(section);
 
-    // ========================================
-    // DISPLAY
-    // ========================================
-
-    container.innerHTML = html;
-
+    });
 
   } catch (error) {
 
@@ -1056,9 +1055,10 @@ async function loadRecentReports() {
         ❌ មិនអាចទាញយករបាយការណ៍បានទេ។
       </div>
     `;
-  }
-}
 
+  }
+
+}
 
 // ==========================================
 // ESCAPE HTML VALUE
