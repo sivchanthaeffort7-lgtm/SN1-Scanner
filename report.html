@@ -175,6 +175,70 @@
       border: 1px solid #fecaca;
     }
 
+ /* ==========================================
+   RECENT REPORTS — LAST 3 DAYS
+   ========================================== */
+
+.recent-reports {
+  background: white;
+  padding: 30px;
+  margin-top: 20px;
+  border-radius: 18px;
+  box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+}
+
+.recent-reports .section-title {
+  margin-bottom: 18px;
+}
+
+.recent-report-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 14px;
+  background: #fafbff;
+}
+
+.recent-report-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.recent-report-date {
+  font-weight: bold;
+  color: #0645ad;
+}
+
+.recent-report-action {
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: #eef4ff;
+  color: #0645ad;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.recent-report-machines {
+  white-space: pre-line;
+  line-height: 1.7;
+  color: #374151;
+  font-weight: 500;
+}
+
+.recent-report-info {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.recent-report-empty {
+  text-align: center;
+  padding: 25px;
+  color: #6b7280;
+}    
     @media (max-width: 700px) {
       .page {
         padding: 15px;
@@ -384,6 +448,29 @@
 
       </div>
 
+<!-- ==========================================
+     RECENT REPORTS — LAST 3 DAYS
+     ========================================== -->
+
+<div class="recent-reports">
+
+  <div class="section-title">
+    របាយការណ៍ ៣ ថ្ងៃចុងក្រោយ
+  </div>
+
+  <div id="recentReportsContent">
+
+    <div style="
+      text-align:center;
+      padding:20px;
+      color:#6b7280;
+    ">
+      កំពុងទាញទិន្នន័យ...
+    </div>
+
+  </div>
+
+</div>      
     </div>
 
   </div>
@@ -660,6 +747,196 @@ machineIdsInput.addEventListener("input", function () {
   }
 
 });    
+
+// ==========================================
+// RECENT REPORTS — LAST 3 DAYS
+// ==========================================
+
+async function loadRecentReports() {
+
+  const container =
+    document.getElementById("recentReportsContent");
+
+  if (!container) {
+    return;
+  }
+
+  container.innerHTML = `
+    <div class="recent-report-empty">
+      កំពុងផ្ទុករបាយការណ៍...
+    </div>
+  `;
+
+
+  try {
+
+    const response = await fetch(
+      REPORT_API_URL
+    );
+
+    const result =
+      await response.json();
+
+
+    // ========================================
+    // CHECK API RESULT
+    // ========================================
+
+    if (!result.success) {
+
+      throw new Error(
+        result.error ||
+        result.message ||
+        "Unable to load reports."
+      );
+
+    }
+
+
+    // ========================================
+    // GET REPORTS
+    // ========================================
+
+    const reports =
+      Array.isArray(result.reports)
+        ? result.reports
+        : [];
+
+
+    if (reports.length === 0) {
+
+      container.innerHTML = `
+        <div class="recent-report-empty">
+          មិនទាន់មានរបាយការណ៍ក្នុង ៣ ថ្ងៃចុងក្រោយទេ។
+        </div>
+      `;
+
+      return;
+    }
+
+
+    // ========================================
+    // DISPLAY REPORTS
+    // ========================================
+
+    container.innerHTML = "";
+
+
+    reports.forEach(function(report) {
+
+      const card =
+        document.createElement("div");
+
+      card.className =
+        "recent-report-card";
+
+
+      // ======================================
+      // MACHINE IDS
+      // ======================================
+
+      const machineIds =
+        Array.isArray(report.machineIds)
+          ? report.machineIds
+          : [];
+
+
+      const machineText =
+        machineIds.join("\n");
+
+
+      // ======================================
+      // CARD
+      // ======================================
+
+      card.innerHTML = `
+
+        <div class="recent-report-header">
+
+          <span class="recent-report-date">
+            📅 ${report.date || ""}
+            ${report.time || ""}
+          </span>
+
+          <span class="recent-report-action">
+            ${report.action || ""}
+          </span>
+
+        </div>
+
+
+        <div class="recent-report-machines">
+          ${machineText}
+        </div>
+
+
+        <div class="recent-report-info">
+
+          From:
+          ${report.from || "-"}
+
+          &nbsp; → &nbsp;
+
+          To:
+          ${report.to || "-"}
+
+          <br>
+
+          Customer:
+          ${report.customer || "-"}
+
+          <br>
+
+          By:
+          ${report.by || "-"}
+
+          ${
+            report.reference
+              ? `<br>Reference: ${report.reference}`
+              : ""
+          }
+
+        </div>
+
+      `;
+
+
+      container.appendChild(card);
+
+    });
+
+
+  } catch (error) {
+
+    console.error(
+      "Recent Reports Error:",
+      error
+    );
+
+
+    container.innerHTML = `
+      <div class="recent-report-empty">
+        ❌ មិនអាចទាញយករបាយការណ៍បានទេ។
+      </div>
+    `;
+
+  }
+
+}
+
+
+// ==========================================
+// LOAD RECENT REPORTS WHEN PAGE OPENS
+// ==========================================
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function() {
+
+    loadRecentReports();
+
+  }
+);    
   </script>
 
 </body>
