@@ -750,6 +750,7 @@ machineIdsInput.addEventListener("input", function () {
 
 // ==========================================
 // RECENT REPORTS — LAST 3 DAYS
+// READ RAW DATA FROM MOVEMENT_HISTORY
 // ==========================================
 
 async function loadRecentReports() {
@@ -767,16 +768,13 @@ async function loadRecentReports() {
     </div>
   `;
 
-
   try {
 
     const response = await fetch(
       REPORT_API_URL + "?report=recent"
     );
 
-    const result =
-      await response.json();
-
+    const result = await response.json();
 
     // ========================================
     // CHECK API RESULT
@@ -789,12 +787,10 @@ async function loadRecentReports() {
         result.message ||
         "Unable to load reports."
       );
-
     }
 
-
     // ========================================
-    // GET REPORTS
+    // GET RAW REPORTS
     // ========================================
 
     const reports =
@@ -802,25 +798,30 @@ async function loadRecentReports() {
         ? result.reports
         : [];
 
+    // ========================================
+    // NO REPORT
+    // ========================================
 
     if (reports.length === 0) {
 
       container.innerHTML = `
         <div class="recent-report-empty">
-          មិនទាន់មានរបាយការណ៍ក្នុង ៣ ថ្ងៃចុងក្រោយទេ។
+          មិនទាន់មានរបាយការណ៍ក្នុង 3 ថ្ងៃចុងក្រោយទេ។
         </div>
       `;
 
       return;
     }
 
-
     // ========================================
-    // DISPLAY REPORTS
+    // CLEAR CONTAINER
     // ========================================
 
     container.innerHTML = "";
 
+    // ========================================
+    // DISPLAY EVERY RAW RECORD
+    // ========================================
 
     reports.forEach(function(report) {
 
@@ -830,20 +831,51 @@ async function loadRecentReports() {
       card.className =
         "recent-report-card";
 
+      // ======================================
+      // MACHINE ID
+      // ======================================
+
+      const machineId =
+        report["Machine ID"] || "-";
 
       // ======================================
-      // MACHINE IDS
+      // DATE + TIME
       // ======================================
 
-      const machineIds =
-        Array.isArray(report.machineIds)
-          ? report.machineIds
-          : [];
+      const date =
+        report["Date"] || "";
 
+      const time =
+        report["Time"] || "";
 
-      const machineText =
-        machineIds.join("\n");
+      // ======================================
+      // ACTION
+      // ======================================
 
+      const action =
+        report["Action"] || "";
+
+      // ======================================
+      // OTHER INFORMATION
+      // ======================================
+
+      const from =
+        report["From"] || "-";
+
+      const to =
+        report["To"] || "-";
+
+      const customer =
+        report["Customer"] || "-";
+
+      const by =
+        report["By"] || "-";
+
+      const reference =
+        report["Reference"] || "";
+
+      const remark =
+        report["Remark"] || "";
 
       // ======================================
       // CARD
@@ -854,45 +886,50 @@ async function loadRecentReports() {
         <div class="recent-report-header">
 
           <span class="recent-report-date">
-            📅 ${report.date || ""}
-            ${report.time || ""}
+            📅 ${date}
+            &nbsp;
+            🕐 ${time}
           </span>
 
           <span class="recent-report-action">
-            ${report.action || ""}
+            ${action}
           </span>
 
         </div>
 
-
         <div class="recent-report-machines">
-          ${machineText}
+          ${machineId}
         </div>
-
 
         <div class="recent-report-info">
 
           From:
-          ${report.from || "-"}
+          ${from}
 
           &nbsp; → &nbsp;
 
           To:
-          ${report.to || "-"}
+          ${to}
 
           <br>
 
           Customer:
-          ${report.customer || "-"}
+          ${customer}
 
           <br>
 
           By:
-          ${report.by || "-"}
+          ${by}
 
           ${
-            report.reference
-              ? `<br>Reference: ${report.reference}`
+            reference
+              ? `<br>Reference: ${reference}`
+              : ""
+          }
+
+          ${
+            remark
+              ? `<br>Remark: ${remark}`
               : ""
           }
 
@@ -900,11 +937,9 @@ async function loadRecentReports() {
 
       `;
 
-
       container.appendChild(card);
 
     });
-
 
   } catch (error) {
 
@@ -912,7 +947,6 @@ async function loadRecentReports() {
       "Recent Reports Error:",
       error
     );
-
 
     container.innerHTML = `
       <div class="recent-report-empty">
@@ -923,7 +957,6 @@ async function loadRecentReports() {
   }
 
 }
-
 
 // ==========================================
 // LOAD RECENT REPORTS WHEN PAGE OPENS
