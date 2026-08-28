@@ -771,7 +771,7 @@ async function loadRecentReports() {
   try {
 
     const response = await fetch(
-      REPORT_API_URL
+      REPORT_API_URL + "?report=recent"
     );
 
     const result =
