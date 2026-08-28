@@ -770,6 +770,10 @@ async function loadRecentReports() {
 
   try {
 
+    // ========================================
+    // GET DATA FROM getRecentReports()
+    // ========================================
+
     const response = await fetch(
       REPORT_API_URL + "?report=recent"
     );
@@ -790,13 +794,20 @@ async function loadRecentReports() {
     }
 
     // ========================================
-    // GET RAW REPORTS
+    // RAW REPORTS
     // ========================================
 
     const reports =
       Array.isArray(result.reports)
         ? result.reports
         : [];
+
+    // ========================================
+    // DAILY SUMMARY
+    // ========================================
+
+    const dailySummary =
+      result.dailySummary || {};
 
     // ========================================
     // NO REPORT
@@ -814,33 +825,39 @@ async function loadRecentReports() {
     }
 
     // ========================================
-    // CLEAR CONTAINER
+    // BUILD RAW TABLE
+    // SAME STRUCTURE AS MOVEMENT_HISTORY
     // ========================================
 
-    container.innerHTML = "";
+    let html = `
+
+      <div class="recent-reports-table-wrapper">
+
+        <table class="recent-reports-table">
+
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Machine ID</th>
+              <th>From</th>
+              <th>To</th>
+              <th>Customer</th>
+              <th>Action</th>
+              <th>Reference</th>
+              <th>By</th>
+              <th>Remark</th>
+            </tr>
+          </thead>
+
+          <tbody>
+    `;
 
     // ========================================
-    // DISPLAY EVERY RAW RECORD
+    // RAW RECORD — ONE MACHINE = ONE ROW
     // ========================================
 
     reports.forEach(function(report) {
-
-      const card =
-        document.createElement("div");
-
-      card.className =
-        "recent-report-card";
-
-      // ======================================
-      // MACHINE ID
-      // ======================================
-
-      const machineId =
-        report["Machine ID"] || "-";
-
-      // ======================================
-      // DATE + TIME
-      // ======================================
 
       const date =
         report["Date"] || "";
@@ -848,98 +865,183 @@ async function loadRecentReports() {
       const time =
         report["Time"] || "";
 
-      // ======================================
-      // ACTION
-      // ======================================
+      const machineId =
+        report["Machine ID"] || "";
+
+      const from =
+        report["From"] || "";
+
+      const to =
+        report["To"] || "";
+
+      const customer =
+        report["Customer"] || "";
 
       const action =
         report["Action"] || "";
 
-      // ======================================
-      // OTHER INFORMATION
-      // ======================================
-
-      const from =
-        report["From"] || "-";
-
-      const to =
-        report["To"] || "-";
-
-      const customer =
-        report["Customer"] || "-";
-
-      const by =
-        report["By"] || "-";
-
       const reference =
         report["Reference"] || "";
+
+      const by =
+        report["By"] || "";
 
       const remark =
         report["Remark"] || "";
 
-      // ======================================
-      // CARD
-      // ======================================
+      html += `
 
-      card.innerHTML = `
+        <tr>
 
-        <div class="recent-report-header">
+          <td>${escapeRecentReportHTML(date)}</td>
 
-          <span class="recent-report-date">
-            📅 ${date}
-            &nbsp;
-            🕐 ${time}
-          </span>
+          <td>${escapeRecentReportHTML(time)}</td>
 
-          <span class="recent-report-action">
-            ${action}
-          </span>
+          <td>
+            <strong>
+              ${escapeRecentReportHTML(machineId)}
+            </strong>
+          </td>
 
-        </div>
+          <td>${escapeRecentReportHTML(from)}</td>
 
-        <div class="recent-report-machines">
-          ${machineId}
-        </div>
+          <td>${escapeRecentReportHTML(to)}</td>
 
-        <div class="recent-report-info">
+          <td>${escapeRecentReportHTML(customer)}</td>
 
-          From:
-          ${from}
+          <td>
+            <span class="recent-action">
+              ${escapeRecentReportHTML(action)}
+            </span>
+          </td>
 
-          &nbsp; → &nbsp;
+          <td>${escapeRecentReportHTML(reference)}</td>
 
-          To:
-          ${to}
+          <td>${escapeRecentReportHTML(by)}</td>
 
-          <br>
+          <td>${escapeRecentReportHTML(remark)}</td>
 
-          Customer:
-          ${customer}
+        </tr>
 
-          <br>
+      `;
 
-          By:
-          ${by}
+    });
 
-          ${
-            reference
-              ? `<br>Reference: ${reference}`
-              : ""
-          }
+    html += `
 
-          ${
-            remark
-              ? `<br>Remark: ${remark}`
-              : ""
-          }
+          </tbody>
+
+        </table>
+
+      </div>
+
+    `;
+
+
+    // ========================================
+    // DAILY SUMMARY
+    // TOTAL MACHINES BY ACTION / DATE
+    // ========================================
+
+    const summaryDates =
+      Object.keys(dailySummary);
+
+    if (summaryDates.length > 0) {
+
+      html += `
+
+        <div class="daily-summary">
+
+          <div class="daily-summary-title">
+            សរុបចំនួនម៉ាស៊ីនតាមសកម្មភាព
+          </div>
+
+          <div class="daily-summary-table-wrapper">
+
+            <table class="daily-summary-table">
+
+              <thead>
+
+                <tr>
+
+                  <th>Date</th>
+                  <th>ជួល</th>
+                  <th>ដកត្រឡប់</th>
+                  <th>ប្ដូរចេញ</th>
+                  <th>ប្ដូរចូល</th>
+                  <th>លក់ចេញ</th>
+                  <th>ជួសជុល</th>
+
+                </tr>
+
+              </thead>
+
+              <tbody>
+      `;
+
+
+      // ========================================
+      // NEWEST DATE FIRST
+      // ========================================
+
+      summaryDates.reverse();
+
+
+      summaryDates.forEach(function(date) {
+
+        const summary =
+          dailySummary[date] || {};
+
+        html += `
+
+          <tr>
+
+            <td>
+              <strong>
+                ${escapeRecentReportHTML(date)}
+              </strong>
+            </td>
+
+            <td>${summary["ជួល"] || 0}</td>
+
+            <td>${summary["ដកត្រឡប់"] || 0}</td>
+
+            <td>${summary["ប្ដូរចេញ"] || 0}</td>
+
+            <td>${summary["ប្ដូរចូល"] || 0}</td>
+
+            <td>${summary["លក់ចេញ"] || 0}</td>
+
+            <td>${summary["ជួសជុល"] || 0}</td>
+
+          </tr>
+
+        `;
+
+      });
+
+
+      html += `
+
+              </tbody>
+
+            </table>
+
+          </div>
 
         </div>
 
       `;
 
-      container.appendChild(card);
+    }
 
-    });
+
+    // ========================================
+    // DISPLAY
+    // ========================================
+
+    container.innerHTML = html;
+
 
   } catch (error) {
 
@@ -949,15 +1051,35 @@ async function loadRecentReports() {
     );
 
     container.innerHTML = `
+
       <div class="recent-report-empty">
+
         ❌ មិនអាចទាញយករបាយការណ៍បានទេ។
+
       </div>
+
     `;
 
   }
 
 }
 
+
+// ==========================================
+// ESCAPE HTML
+// PREVENT RAW DATA BREAKING THE TABLE
+// ==========================================
+
+function escapeRecentReportHTML(value) {
+
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+}
 // ==========================================
 // LOAD RECENT REPORTS WHEN PAGE OPENS
 // ==========================================
