@@ -1402,3 +1402,25 @@ color:gray;
     font-size: 16px;
     font-weight: 700;
 }
+/* NOTIFICATIONS */
+.notification-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+.notification-wrapper .notification-badge {
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: 50%;
+    background: red;
+    color: white;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
