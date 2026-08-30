@@ -1414,13 +1414,18 @@ color:gray;
     top: -6px;
     right: -8px;
     min-width: 18px;
-    height: 18px;
+    height: 12px;
     padding: 0 5px;
     border-radius: 50%;
     background: red;
     color: white;
-    font-size: 11px;
+    font-size: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+/* Hide notification badge when there are no unread notifications */
+.notification-badge:empty,
+.notification-badge[data-count="0"] {
+    display: none !important;
 }
