@@ -343,13 +343,15 @@ body {
 
 }
 
-/* BACK TO DASHBOARD */
-.back-dashboard-btn {
+/* BACK TO DASHBOARD BUTTON */
+.back-btn {
     display: inline-flex;
     align-items: center;
     gap: 10px;
 
-    padding: 11px 20px;
+    padding: 12px 20px;
+    margin: 0 0 20px 0;
+
     border: 1px solid #d9e2ec;
     border-radius: 10px;
 
@@ -361,22 +363,20 @@ body {
     font-weight: 600;
 
     cursor: pointer;
-    text-decoration: none;
-
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.08);
 
     transition: all 0.2s ease;
 }
 
-.back-dashboard-btn i {
+.back-btn i {
     font-size: 17px;
 }
 
-.back-dashboard-btn:hover {
+.back-btn:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
-.back-dashboard-btn:active {
+.back-btn:active {
     transform: translateY(0);
 }
