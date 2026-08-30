@@ -549,7 +549,33 @@
         font-size: 16px;
       }
 
-    }
+/* BACK TO DASHBOARD */
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0 0 20px;
+  padding: 11px 18px;
+  border: none;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #1f2937;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+}
+
+.back-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.14);
+}
+
+.back-btn i {
+  font-size: 16px;
+}  
+      
+}
 
   </style>
 </head>
@@ -557,6 +583,10 @@
 
 <body>
 
+  <button class="back-btn" onclick="window.location.href='index.html'">
+  <i class="fa-solid fa-arrow-left"></i>
+  Dashboard
+</button>  
   <div class="page">
 
 
