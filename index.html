@@ -296,7 +296,15 @@
         if (badge) {
             badge.style.display = "none";
         }
-    }    
+       localStorage.setItem("notificationViewed", "true"); 
+    }  
+document.addEventListener("DOMContentLoaded", function () {
+    const badge = document.querySelector(".notification-badge");
+
+    if (badge && localStorage.getItem("notificationViewed") === "true") {
+        badge.style.display = "none";
+    }
+});    
 </script>
 
 </body>
