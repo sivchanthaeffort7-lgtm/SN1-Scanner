@@ -645,6 +645,10 @@ document
 
       if (result.success) {
 
+         document.querySelector(".notification-badge").style.display = "block";
+          document.querySelector(".notification-badge").textContent = "1";
+          localStorage.setItem("notificationViewed", "false");
+        
         status.className =
           "status success";
 
