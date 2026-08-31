@@ -649,6 +649,28 @@ document
           document.querySelector(".notification-badge").textContent = "1";
           localStorage.setItem("notificationViewed", "false");
         
+         // 🔔 BROWSER NOTIFICATION
+if ("Notification" in window) {
+
+    if (Notification.permission === "granted") {
+
+        new Notification("SN1 Dashboard", {
+            body: "មានរបាយការណ៍ថ្មីបាន Updated ក្នុង Movement_History",
+            icon: "/favicon.ico"
+        });
+
+    } else if (Notification.permission !== "denied") {
+
+        const permission = await Notification.requestPermission();
+
+        if (permission === "granted") {
+            new Notification("SN1 Dashboard", {
+                body: "មានរបាយការណ៍ថ្មីបាន Updated ក្នុង Movement_History",
+                icon: "/favicon.ico"
+            });
+        }
+    }
+}        
         status.className =
           "status success";
 
