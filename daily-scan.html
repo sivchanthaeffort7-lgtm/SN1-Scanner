@@ -402,7 +402,6 @@
 let scanner = null;
 
 
-
 function startScanner() {
 
     const area = document.getElementById("scannerArea");
@@ -420,30 +419,28 @@ function startScanner() {
         { facingMode: "environment" },
 
         {
-            fps: 10,
-            qrbox: {
-                width: 300,
-                height: 300
-            },
-            aspectRatio: 1.0
+            fps: 15,
+
+            // Scan the whole camera view
+            // No small QR box required
+            aspectRatio: 1.7777778,
+
+            disableFlip: false
         },
 
         function(decodedText) {
 
             const text = String(decodedText).trim();
 
-            // Only accept Machine ID format: letters/numbers + hyphen + numbers
+            // Only accept Machine ID format
             const match = text.match(/\b[A-Z0-9]+-\d+\b/i);
 
-if (!match) {
-    showStatus(
-        "❌ QR នេះមិនមានលេខម៉ាស៊ីនត្រឹមត្រូវទេ",
-        false
-    );
-    return;
-}
+            if (!match) {
+                return;
+            }
 
-const machineID = match[0].toUpperCase();
+            const machineID = match[0].toUpperCase();
+
             document.getElementById("machineNumber").value = machineID;
 
             showStatus(
