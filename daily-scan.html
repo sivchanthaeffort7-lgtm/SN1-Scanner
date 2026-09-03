@@ -421,11 +421,11 @@ function startScanner() {
         {
             fps: 15,
 
-            // Scan the whole camera view
-            // No small QR box required
-            aspectRatio: 1.7777778,
-
-            disableFlip: false
+            qrbox: { 
+                width: 220,
+                height: 220
+            }
+                    
         },
 
         function(decodedText) {
