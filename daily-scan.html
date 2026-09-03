@@ -419,16 +419,21 @@ function startScanner() {
         { facingMode: "environment" },
 
         {
-            fps: 30,
+            fps: 20,
+
+            qrBox: {
+                width: 120,
+                height: 120
+            },
 
 
             videoConstraints: {
                 facingMode: { ideal: "environment"},
-                width: { ideal: 220},
-                height: { ideal: 220},
+                width: { ideal: 1280},
+                height: { ideal: 920},
                 focusMode: "continuous"
             },
-            disableFlip: true
+            disableFlip: false
                     
         },
 
