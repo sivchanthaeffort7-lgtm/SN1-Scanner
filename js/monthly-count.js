@@ -259,8 +259,8 @@ function startMonthlyScanner() {
         {
             fps: 10,
             qrbox: {
-                width: 300,
-                height: 300
+                width: 120,
+                height: 120
             },
             aspectRatio: 1.0
         },
