@@ -257,7 +257,10 @@ function startMonthlyScanner() {
         { facingMode: "environment" },
 
         {
-            fps: 10,
+            fps: 30,
+            videoConstraints: {
+                focusMode: "continuous"
+            },
             qrbox: {
                 width: 120,
                 height: 120
